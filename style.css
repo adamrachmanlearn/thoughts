@@ -13,3 +13,6 @@ a:hover {
 nav a {
     margin-right: .5rem;
 }
+#main-content img {
+    border-radius: .2rem;
+}
