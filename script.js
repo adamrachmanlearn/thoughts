@@ -87,8 +87,7 @@ function renderFeatured (manifest) {
     featured.forEach(page => {
         const newP = document.createElement("p");
         newP.innerHTML =
-        `${formatDate(page.posted)} -
-        <a href="#${page.slug}">${page.title}</a>`
+        `<a href="#${page.slug}">${page.title}</a>`
         featuredCont.append(newP);
     });
 }
