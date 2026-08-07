@@ -1,0 +1,15 @@
+html {
+    font-size: 18px;
+}
+a {
+    text-decoration: none;
+}
+a:focus {
+    outline: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+nav a {
+    margin-right: .5rem;
+}
