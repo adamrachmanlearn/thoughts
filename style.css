@@ -11,8 +11,18 @@ a:hover {
     text-decoration: underline;
 }
 nav a {
-    margin-right: .5rem;
+    margin-right: 1.5rem;
 }
 #main-content img {
     border-radius: .2rem;
+}
+@media (max-width: 430px) {
+    nav a {
+        margin-right: .5rem;
+    }
+}
+@media (max-width: 350px) {
+    nav a {
+        margin-right: .186rem;
+    }
 }
