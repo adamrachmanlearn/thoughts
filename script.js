@@ -126,10 +126,10 @@ darkToggle.addEventListener("click", (e) => {
 
     document.body.classList.toggle("latex-dark");
 
-    if (darkToggle.textContent === "Dark 🌑") {
-        darkToggle.textContent = "Light ☀️"
+    if (darkToggle.textContent === "dark 🌑") {
+        darkToggle.textContent = "light ☀️"
     } else {
-        darkToggle.textContent = "Dark 🌑"
+        darkToggle.textContent = "dark 🌑"
     }
 })
 
