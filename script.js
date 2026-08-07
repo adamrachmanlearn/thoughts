@@ -48,8 +48,7 @@ async function renderThought (page) {
     mainCont.innerHTML =
     `<h1>${page.title}</h1>
     <p class="author"><em>Posted on ${formatDate(page.posted)}</em></p>
-    ${content}
-    <a href="#archives">More &rarr;</a>`;
+    ${content}`;
 
     adjustExtLinks(mainCont);
 
