@@ -3,7 +3,7 @@
 
 So.. umm.. hi again(?) it's been so long since I wrote lmao.
 
-Actually it isn't that long, but if you compared the gaps between my previous posts, this currently holds the longest gap between them. So what I was up to? Boring answer is I was migrating this site, but that doesn't sounds cool enough. Let me re-phrase it: *I was searching for perfection, found enlightenment instead*.
+Actually, it isn't that long, but if you compared the gaps between my previous posts, this currently holds the longest gap between them. So what was I up to? Boring answer is I was migrating this site, but that doesn't sounds cool enough. Let me re-phrase it: *I was searching for perfection, found enlightenment instead*.
 
 Some of you might know that in the past, this site ran on [Notion](https://www.notion.com/), there's nothing wrong with that, in fact I really likes it, it might have a bit of learning curve to get used to, but once you get the hang of it, it's really powerful, even able to host a static site for free, crazy! So.. yeah I'd pretty much recommend it to anyone that's looking for some productivity tools to tinker with lol.
 
