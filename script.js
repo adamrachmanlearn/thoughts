@@ -118,10 +118,7 @@ function formatDate (string) {
 }
 
 function scrollToTop () {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    window.scrollTo({top: 0, behavior: "instant"});
 }
 
 darkToggle.addEventListener("click", (e) => {
