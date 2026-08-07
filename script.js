@@ -32,7 +32,7 @@ async function renderHome (manifest) {
 }
 
 async function renderAbout (manifest) {
-    const page = manifest.find(page => page.slug === "about-me");
+    const page = manifest.find(page => page.slug === "about");
     const content = await getContent(page.filePath);
 
     mainCont.innerHTML = content.replaceAll("<br>", "");
@@ -61,7 +61,7 @@ function renderArchives (manifest) {
     mainCont.innerHTML = "<h1>Archives</h1>";
 
     const pages = manifest.filter (
-        page => page.slug !== "about-me" && page.slug !== "archives"
+        page => page.slug !== "about" && page.slug !== "archives"
     );
 
     pages.forEach(page => {
@@ -145,7 +145,7 @@ async function router () {
     if (!slug) {
         await renderHome(manifest);
         return;
-    } else if (slug === "about-me") {
+    } else if (slug === "about") {
         await renderAbout(manifest);
         return;
     } else if (slug === "archives") {

@@ -63,8 +63,8 @@
         "filePath": "./thoughts/theactualreasonyoudothings.md"
     },
     {
-        "slug": "about-me",
-        "filePath": "./thoughts/aboutme.md"
+        "slug": "about",
+        "filePath": "./thoughts/about.md"
     },
     {
         "slug": "archives"
