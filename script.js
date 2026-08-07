@@ -95,9 +95,7 @@ function renderFeatured (manifest) {
 }
 
 function renderNotFound () {
-    mainCont.innerHTML =
-    `<p>Page not created.. <em>yet</em>.</p>
-    <a href="#">&larr; Home</a>`;
+    mainCont.innerHTML = "<p>Page not created.. <em>yet</em>.</p>";
 
     featuredCont.style.display = "none";
 }
