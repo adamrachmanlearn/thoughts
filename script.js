@@ -58,6 +58,7 @@ async function renderThought (page) {
 }
 
 function renderArchives (manifest) {
+    let currentYear;
     mainCont.innerHTML = "<h1>Archives</h1>";
 
     const pages = manifest.filter (
@@ -65,6 +66,14 @@ function renderArchives (manifest) {
     );
 
     pages.forEach(page => {
+        let currentPageYear = page.posted.slice(0, 4);
+        if (currentYear !== currentPageYear) {
+            currentYear = currentPageYear;
+            const newH3 = document.createElement("h3");
+            newH3.textContent = currentYear;
+            mainCont.append(newH3);
+        }
+
         const newP = document.createElement("p");
         newP.innerHTML =
         `${formatDate(page.posted)} - <a href="#${page.slug}">${page.title}</a>`;
