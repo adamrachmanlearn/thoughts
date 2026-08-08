@@ -38,6 +38,16 @@ async function renderAbout (manifest, slug) {
 
     mainCont.innerHTML = content.replaceAll("<br>", "");
 
+    if (slug === "now") {
+        const spacer = document.createElement("br");
+        const newP = document.createElement("p");
+        newP.innerHTML = `<small>
+            What is a
+            <a href='https://nownownow.com/about'>/now page?</a>
+        </small>`;
+        mainCont.append(spacer, newP);
+    }
+
     adjustExtLinks(mainCont);
 
     featuredCont.style.display = "none";
@@ -134,9 +144,9 @@ darkToggle.addEventListener("click", (e) => {
     document.body.classList.toggle("latex-dark");
 
     if (darkToggle.innerHTML === "light/<b>dark</b>") {
-        darkToggle.innerHTML = "<b>light</b>/dark"
+        darkToggle.innerHTML = "<b>light</b>/dark";
     } else {
-        darkToggle.innerHTML = "light/<b>dark</b>"
+        darkToggle.innerHTML = "light/<b>dark</b>";
     }
 })
 
