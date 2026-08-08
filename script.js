@@ -1,7 +1,7 @@
 const mainCont = document.getElementById("main-content");
 const featuredCont = document.getElementById("featured");
 const darkToggle = document.getElementById("dark-toggle");
-const hiddenPages = ["about", "archives"];
+const hiddenPages = ["about", "archives", "now"];
 
 async function getManifest () {
     const res = await fetch("./thoughts/thoughts.json");
@@ -32,11 +32,13 @@ async function renderHome (manifest) {
     scrollToTop();
 }
 
-async function renderAbout (manifest) {
-    const page = manifest.find(page => page.slug === "about");
+async function renderAbout (manifest, slug) {
+    const page = manifest.find(page => page.slug === slug);
     const content = await getContent(page.filePath);
 
     mainCont.innerHTML = content.replaceAll("<br>", "");
+
+    adjustExtLinks(mainCont);
 
     featuredCont.style.display = "none";
 
@@ -154,8 +156,8 @@ async function router () {
     if (!slug) {
         await renderHome(manifest);
         return;
-    } else if (slug === "about") {
-        await renderAbout(manifest);
+    } else if (slug === "about" || slug === "now") {
+        await renderAbout(manifest, slug);
         return;
     } else if (slug === "archives") {
         await renderArchives(manifest);

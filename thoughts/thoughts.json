@@ -67,6 +67,10 @@
         "filePath": "./thoughts/about.md"
     },
     {
+        "slug": "now",
+        "filePath": "./thoughts/now.md"
+    },
+    {
         "slug": "archives"
     }
 ]
