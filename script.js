@@ -45,21 +45,6 @@ async function renderAbout (manifest, slug) {
     scrollToTop();
 }
 
-async function renderThought (page) {
-    const content = await getContent(page.filePath);
-
-    mainCont.innerHTML =
-    `<h1>${page.title}</h1>
-    <p class="author"><em>Posted on ${formatDate(page.posted)}</em></p>
-    ${content}`;
-
-    adjustExtLinks(mainCont);
-
-    featuredCont.style.display = "none";
-
-    scrollToTop();
-}
-
 function renderArchives (manifest) {
     let currentYear;
     mainCont.innerHTML = "<h1>Archives</h1>";
@@ -81,6 +66,21 @@ function renderArchives (manifest) {
         `${formatDate(page.posted)} - <a href="#${page.slug}">${page.title}</a>`;
         mainCont.append(newP);
     });
+
+    featuredCont.style.display = "none";
+
+    scrollToTop();
+}
+
+async function renderThought (page) {
+    const content = await getContent(page.filePath);
+
+    mainCont.innerHTML =
+    `<h1>${page.title}</h1>
+    <p class="author"><em>Posted on ${formatDate(page.posted)}</em></p>
+    ${content}`;
+
+    adjustExtLinks(mainCont);
 
     featuredCont.style.display = "none";
 
