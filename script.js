@@ -1,6 +1,7 @@
 const mainCont = document.getElementById("main-content");
 const featuredCont = document.getElementById("featured");
 const darkToggle = document.getElementById("dark-toggle");
+const hiddenPages = ["about", "archives"];
 
 async function getManifest () {
     const res = await fetch("./thoughts/thoughts.json");
@@ -61,9 +62,8 @@ function renderArchives (manifest) {
     let currentYear;
     mainCont.innerHTML = "<h1>Archives</h1>";
 
-    const pages = manifest.filter (
-        page => page.slug !== "about" && page.slug !== "archives"
-    );
+    // only return slug that doesn't included in hiddenPages arr
+    const pages = manifest.filter (page => !hiddenPages.includes(page.slug));
 
     pages.forEach(page => {
         let currentPageYear = page.posted.slice(0, 4);
