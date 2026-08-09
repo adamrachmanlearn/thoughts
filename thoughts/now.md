@@ -1,29 +1,29 @@
 # /now
 
-Last updated: Aug 8, 2026
+Last updated: Aug 9, 2026
 
-### Life
-- [Migrate this site] from Notion
-- Poor sleep because of hot humid weather and bad pillow
-- Able to get 25km weekly mileage in running, nearest target would be 30km++
+### Activities and Events
+- [Migrate this site] from Notion (finally)
+- Poor sleep cause of hot humid weather and bad pillow
+- Able to get 25km weekly mileage, nearest target would be 30km++
 
-### Text
-- The Patron of Villains by LICO, Bomhanbangul
-- The Art of Spending Money by Morgan Housel
-- Don't Sweat the Small Stuff by Richard Carlson
+### Comics and Books
+- Current manhwa is The Patron of Villains by LICO, Bomhanbangul (lmk something similar)
+- Recently read The Art of Spending Money by Morgan Housel
+- Loved Don't Sweat the Small Stuff by Richard Carlson (helped me cope thru senior year in college)
 
-### Audio
+### Musics and Audios
 - Discovering Tsukuyomi, riria., and Uru
-- TK from Ling Tosite Sigure
-- Cö shu Nie
+- TK from Ling Tosite Sigure (unravel)
+- Cö shu Nie (asphyxia)
 - Yuuri
 - Mosawo
 - Yama
 
-### Consumables
+### Foods and Beverages
 - Chinese food (fried rice and soup noodles combo are goated fr)
-- Instant noodles (what can i say, i love noodles)
-- Cheese cake
+- Instant noodles
+- Cheese cakes
 - Latte
 
 [Migrate this site]: #i-was-searching-for-perfection-found-enlightenment-instead
