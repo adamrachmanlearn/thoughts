@@ -29,6 +29,7 @@ async function renderHome (manifest) {
     mainCont.innerHTML =
     `<h1>${page.title}</h1>
     <p class="author"><em>Posted on ${formatDate(page.posted)}</em></p>
+    <br>
     ${content}`;
 
     adjustExtLinks(mainCont);
@@ -94,6 +95,7 @@ async function renderThought (page) {
     mainCont.innerHTML =
     `<h1>${page.title}</h1>
     <p class="author"><em>Posted on ${formatDate(page.posted)}</em></p>
+    <br>
     ${content}`;
 
     adjustExtLinks(mainCont);
