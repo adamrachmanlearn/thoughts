@@ -28,4 +28,4 @@ Last updated: Aug 9, 2026
 - Cheese cakes
 - Latte
 
-[Migrate this site]: #i-was-searching-for-perfection-found-enlightenment-instead
+[Migrate this site]: #i-was-searching-for-perfection,-found-enlightenment-instead
