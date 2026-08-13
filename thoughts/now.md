@@ -2,6 +2,8 @@
 
 Last updated: Aug 9, 2026
 
+<br>
+
 ### Activities and Events
 - [Migrate this site] from Notion (finally)
 - Poor sleep cause of hot humid weather and bad pillow

@@ -51,7 +51,7 @@ async function renderAbout (manifest, slug) {
         const newP = document.createElement("p");
         newP.innerHTML = `<small>
             What is a
-            <a href='https://nownownow.com/about'>/now page?</a>
+            <a href='https://nownownow.com/about'>/now page</a>?
         </small>`;
         mainCont.append(spacer, newP);
     }
