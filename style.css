@@ -13,6 +13,9 @@ a:hover {
 nav a {
     margin-right: 2rem;
 }
+#main-content {
+    min-height: 30vh;
+}
 #main-content img {
     border-radius: .2rem;
 }
