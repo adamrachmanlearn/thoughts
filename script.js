@@ -1,3 +1,9 @@
+// set marked js to include <br> on a single line break (github behavior)
+marked.use({
+    gfm: true,
+    breaks: true
+});
+
 const mainCont = document.getElementById("main-content");
 const featuredCont = document.getElementById("featured");
 const darkToggle = document.getElementById("dark-toggle");
@@ -12,7 +18,7 @@ async function getManifest () {
 async function getContent (filePath) {
     const res = await fetch(filePath);
     if (!res.ok) throw new Error("Failed fetching content");
-    return marked.parse(await res.text()).replaceAll("</p>", "</p><br>");
+    return marked.parse(await res.text());
 }
 
 async function renderHome (manifest) {
@@ -35,8 +41,8 @@ async function renderHome (manifest) {
 async function renderAbout (manifest, slug) {
     const page = manifest.find(page => page.slug === slug);
     const content = await getContent(page.filePath);
-
-    mainCont.innerHTML = content.replaceAll("<br>", "");
+    
+    mainCont.innerHTML = content;
 
     if (slug === "now") {
         const spacer = document.createElement("br");
