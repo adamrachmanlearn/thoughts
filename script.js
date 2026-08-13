@@ -28,7 +28,7 @@ async function renderHome (manifest) {
     const content = await getContent(page.filePath);
 
     mainCont.innerHTML =
-    `<h1>${page.title}</h1>
+    `<h1>${slugToTitle(page.slug)}</h1>
     <p class="author"><em>Posted on ${formatDate(page.posted)}</em></p>
     <br>
     ${content}`;
@@ -106,8 +106,7 @@ function renderArchives (manifest) {
 
         const newP = document.createElement("p");
         newP.innerHTML =
-        // `${formatDate(page.posted)} - <a href="#${page.slug}">${page.title}</a>`;
-        `${page.posted.slice(-2)} - <a href="#${page.slug}">${page.title}</a>`;
+        `${page.posted.slice(-2)} - <a href="#${page.slug}">${slugToTitle(page.slug)}</a>`;
         mainCont.append(newP);
     });
 
@@ -120,7 +119,7 @@ async function renderThought (page) {
     const content = await getContent(page.filePath);
 
     mainCont.innerHTML =
-    `<h1>${page.title}</h1>
+    `<h1>${slugToTitle(page.slug)}</h1>
     <p class="author"><em>Posted on ${formatDate(page.posted)}</em></p>
     <br>
     ${content}`;
@@ -143,7 +142,7 @@ function renderFeatured (manifest) {
     featured.forEach(page => {
         const newP = document.createElement("p");
         newP.innerHTML =
-        `<a href="#${page.slug}">${page.title}</a>`
+        `<a href="#${page.slug}">${slugToTitle(page.slug)}</a>`
         featuredCont.append(newP);
     });
 }
@@ -169,6 +168,18 @@ function formatDate (string) {
     }).format(date);
 }
 
+function slugToTitle (string) {
+    /*
+        replace - with space
+        make first char with uppercase
+        make standalone i into I (pronoun)
+    */
+    return string
+        .replace(/-/g, " ")
+        .replace(/^./, char => char.toUpperCase())
+        .replace(/\bi\b/gi, "I");
+}
+
 function scrollToTop (behavior) {
     if (behavior === undefined) behavior = "instant";
     window.scrollTo({top: 0, behavior: behavior});
@@ -184,7 +195,9 @@ darkToggle.addEventListener("click", (e) => {
     } else {
         darkToggle.innerHTML = "light/<b>dark</b>";
     }
-})
+});
+
+topButton.addEventListener("click", () => scrollToTop("smooth"));
 
 function adjustExtLinks (container) {
     container.querySelectorAll("a").forEach(link => {
@@ -220,5 +233,3 @@ async function router () {
 
 window.addEventListener("DOMContentLoaded", router);
 window.addEventListener("hashchange", router);
-
-topButton.addEventListener("click", () => scrollToTop("smooth"));
