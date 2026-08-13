@@ -106,7 +106,7 @@ async function renderThought (page) {
 }
 
 function renderFeatured (manifest) {
-    featuredCont.innerHTML = "";
+    featuredCont.innerHTML = "<br>";
     const featured = manifest.filter(page => page.metaTag === "featured");
 
     const newHeader = document.createElement("h3");
