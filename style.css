@@ -16,6 +16,9 @@ nav a {
 #main-content img {
     border-radius: .2rem;
 }
+.top {
+    cursor: pointer;
+}
 /* removes trailing underline on touchscreen */
 @media (hover: none) {
     a:hover {

@@ -7,6 +7,7 @@ marked.use({
 const mainCont = document.getElementById("main-content");
 const featuredCont = document.getElementById("featured");
 const darkToggle = document.getElementById("dark-toggle");
+const topButton = document.querySelector(".top");
 const hiddenPages = ["about", "archives", "now"];
 
 async function getManifest () {
@@ -142,8 +143,9 @@ function formatDate (string) {
     }).format(date);
 }
 
-function scrollToTop () {
-    window.scrollTo({top: 0, behavior: "instant"});
+function scrollToTop (behavior) {
+    if (behavior === undefined) behavior = "instant";
+    window.scrollTo({top: 0, behavior: behavior});
 }
 
 darkToggle.addEventListener("click", (e) => {
@@ -192,3 +194,5 @@ async function router () {
 
 window.addEventListener("DOMContentLoaded", router);
 window.addEventListener("hashchange", router);
+
+topButton.addEventListener("click", () => scrollToTop("smooth"));
