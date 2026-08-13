@@ -64,7 +64,23 @@ async function renderAbout (manifest, slug) {
 }
 
 function renderArchives (manifest) {
+    const monthName = [
+        "",
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ];
     let currentYear;
+    let currentMonth;
     mainCont.innerHTML = "<h1>Archives</h1>";
 
     // only return slug that doesn't included in hiddenPages arr
@@ -72,6 +88,8 @@ function renderArchives (manifest) {
 
     pages.forEach(page => {
         let currentPageYear = page.posted.slice(0, 4);
+        let currentPageMonth = Number(page.posted.slice(5, 7));
+
         if (currentYear !== currentPageYear) {
             currentYear = currentPageYear;
             const newH3 = document.createElement("h3");
@@ -79,9 +97,17 @@ function renderArchives (manifest) {
             mainCont.append(newH3);
         }
 
+        if (currentMonth !== currentPageMonth) {
+            currentMonth = currentPageMonth;
+            const newH5 = document.createElement("h5");
+            newH5.textContent = monthName[currentMonth];
+            mainCont.append(newH5);
+        }
+
         const newP = document.createElement("p");
         newP.innerHTML =
-        `${formatDate(page.posted)} - <a href="#${page.slug}">${page.title}</a>`;
+        // `${formatDate(page.posted)} - <a href="#${page.slug}">${page.title}</a>`;
+        `${page.posted.slice(-2)} - <a href="#${page.slug}">${page.title}</a>`;
         mainCont.append(newP);
     });
 
