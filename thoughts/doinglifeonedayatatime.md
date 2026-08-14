@@ -1,7 +1,3 @@
-> &#9888; The post contains implications, kindly skip this one if you are uncomfortable.
-
-<br>
-
 *“Where do you see yourself in 5 years?”*. Ah yes, the one question that every recruiter do, no matter what.
 
 <br>
