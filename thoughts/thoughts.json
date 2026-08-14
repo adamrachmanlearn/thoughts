@@ -31,7 +31,7 @@
     },
     {
         "slug": "how-stepping-back-from-things-helped-me",
-        "metaTag": "",
+        "metaTag": "featured",
         "posted": "2026-07-31",
         "filePath": "./thoughts/howsteppingbackfromthingshelpedme.md"
     },
@@ -43,7 +43,7 @@
     },
     {
         "slug": "why-my-best-runs-are-often-the-slowest",
-        "metaTag": "featured",
+        "metaTag": "",
         "posted": "2026-07-28",
         "filePath": "./thoughts/whymybestrunsareoftentheslowest.md"
     },
