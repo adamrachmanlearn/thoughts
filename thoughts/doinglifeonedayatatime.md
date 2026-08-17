@@ -42,7 +42,7 @@ I often hear some says *“look at the big picture..”*, you do you if that hel
 
 <br>
 
-For the next `time metric` you chose, just focus on doing what you need to do. I do believe every single one of us *know* what we need to do, it’s just sometimes starting is terrifying, it has so much power over us. But what if we can just do it for as long as `time metric` allows, no pressure.
+For the next time *[time metric]* you chose, just focus on doing what you need to do. I do believe every single one of us *know* what we need to do, it’s just sometimes starting is terrifying, it has so much power over us. But what if we can just do it for as long as *[time metric]* allows, no pressure.
 
 <br>
 
