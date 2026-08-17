@@ -6,6 +6,7 @@ marked.use({
 
 const mainCont = document.getElementById("main-content");
 const featuredCont = document.getElementById("featured");
+const badgeCont = document.querySelector(".badge-container");
 const darkToggle = document.getElementById("dark-toggle");
 const topButton = document.querySelector(".top");
 const hiddenPages = ["about", "archives", "now"];
@@ -36,6 +37,7 @@ async function renderHome (manifest) {
     adjustExtLinks(mainCont);
 
     featuredCont.style.display = "block";
+    badgeCont.style.display = "flex";
 
     scrollToTop();
 }
@@ -59,6 +61,7 @@ async function renderAbout (manifest, slug) {
     adjustExtLinks(mainCont);
 
     featuredCont.style.display = "none";
+    badgeCont.style.display = "none";
 
     scrollToTop();
 }
@@ -111,6 +114,7 @@ function renderArchives (manifest) {
     });
 
     featuredCont.style.display = "none";
+    badgeCont.style.display = "none";
 
     scrollToTop();
 }
@@ -127,6 +131,7 @@ async function renderThought (page) {
     adjustExtLinks(mainCont);
 
     featuredCont.style.display = "none";
+    badgeCont.style.display = "none";
 
     scrollToTop();
 }
@@ -151,6 +156,7 @@ function renderNotFound () {
     mainCont.innerHTML = "<p>Page not created.. <em>yet</em>.</p>";
 
     featuredCont.style.display = "none";
+    badgeCont.style.display = "none";
 }
 
 function formatDate (string) {

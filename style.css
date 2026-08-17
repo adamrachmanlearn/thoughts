@@ -22,6 +22,20 @@ nav a {
 .top {
     cursor: pointer;
 }
+.badge-container {
+    margin-top: 4rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: .5rem;
+}
+.badge-container img {
+    box-sizing: border-box;
+    height: 20px;
+}
+.badge-container img:first-child {
+    height: 31px;
+}
+
 /* removes trailing underline on touchscreen */
 @media (hover: none) {
     a:hover {
