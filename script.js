@@ -156,7 +156,7 @@ function renderNotFound () {
     mainCont.innerHTML = 
     `<h1>Not found</h1>
     <br>
-    <p>Thought you're looking for isn't created.. at least <em>yet</em>.</p>`;
+    <p>Page you're looking for isn't created.. at least <em>yet</em>.</p>`;
 
     featuredCont.style.display = "none";
     badgeCont.style.display = "flex";
