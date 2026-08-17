@@ -32,7 +32,7 @@ nav a {
     box-sizing: border-box;
     height: 20px;
 }
-.badge-container img:first-child {
+.badge-container .classic-badge{
     height: 31px;
 }
 
