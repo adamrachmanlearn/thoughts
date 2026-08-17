@@ -109,7 +109,7 @@ function renderArchives (manifest) {
 
         const newP = document.createElement("p");
         newP.innerHTML =
-        `${page.posted.slice(-2)} - <a href="#${page.slug}">${slugToTitle(page.slug)}</a>`;
+        `${page.posted.slice(-2)} &emsp; <a href="#${page.slug}">${slugToTitle(page.slug)}</a>`;
         mainCont.append(newP);
     });
 
