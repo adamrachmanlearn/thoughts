@@ -153,10 +153,13 @@ function renderFeatured (manifest) {
 }
 
 function renderNotFound () {
-    mainCont.innerHTML = "<p>Page not created.. <em>yet</em>.</p>";
+    mainCont.innerHTML = 
+    `<h1>Not found</h1>
+    <br>
+    <p>Thought you're looking for isn't created.. at least <em>yet</em>.</p>`;
 
     featuredCont.style.display = "none";
-    badgeCont.style.display = "none";
+    badgeCont.style.display = "flex";
 }
 
 function formatDate (string) {
