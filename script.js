@@ -113,6 +113,7 @@ function renderArchives (manifest) {
 
             // create ul for this month
             currentUl = document.createElement("ul");
+            currentUl.classList.add("no-style-list");
             mainCont.append(currentUl);
         }
 
@@ -153,6 +154,8 @@ function renderFeatured (manifest) {
     const newUl = document.createElement("ul");
 
     newHeader.textContent = "Featured thoughts";
+    newUl.classList.add("no-style-list");
+
     featuredCont.append(newHeader);
     featuredCont.append(newUl);
 
