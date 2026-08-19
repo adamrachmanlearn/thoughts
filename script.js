@@ -141,14 +141,17 @@ function renderFeatured (manifest) {
     const featured = manifest.filter(page => page.metaTag === "featured");
 
     const newHeader = document.createElement("h3");
+    const newUl = document.createElement("ul");
+
     newHeader.textContent = "Featured thoughts";
     featuredCont.append(newHeader);
+    featuredCont.append(newUl);
 
     featured.forEach(page => {
-        const newP = document.createElement("p");
-        newP.innerHTML =
+        const newLi = document.createElement("li");
+        newLi.innerHTML =
         `<a href="#${page.slug}">${slugToTitle(page.slug)}</a>`
-        featuredCont.append(newP);
+        newUl.append(newLi);
     });
 }
 

@@ -10,6 +10,12 @@ a:focus {
 a:hover {
     text-decoration: underline;
 }
+li {
+    list-style: none;
+}
+ul {
+    padding: 0;
+}
 nav a {
     margin-right: 2rem;
 }
