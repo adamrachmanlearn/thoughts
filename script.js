@@ -84,6 +84,9 @@ function renderArchives (manifest) {
     ];
     let currentYear;
     let currentMonth;
+    // global var to refer to ul
+    let currentUl;
+
     mainCont.innerHTML = "<h1>Archives</h1>";
 
     // only return slug that doesn't included in hiddenPages arr
@@ -95,6 +98,8 @@ function renderArchives (manifest) {
 
         if (currentYear !== currentPageYear) {
             currentYear = currentPageYear;
+            // resetting month if year changed
+            currentMonth = null;
             const newH3 = document.createElement("h3");
             newH3.textContent = currentYear;
             mainCont.append(newH3);
@@ -105,12 +110,16 @@ function renderArchives (manifest) {
             const newH5 = document.createElement("h5");
             newH5.textContent = monthName[currentMonth];
             mainCont.append(newH5);
+
+            // create ul for this month
+            currentUl = document.createElement("ul");
+            mainCont.append(currentUl);
         }
 
-        const newP = document.createElement("p");
-        newP.innerHTML =
+        const newLi = document.createElement("li");
+        newLi.innerHTML =
         `${page.posted.slice(-2)} &emsp; <a href="#${page.slug}">${slugToTitle(page.slug)}</a>`;
-        mainCont.append(newP);
+        currentUl.append(newLi);
     });
 
     featuredCont.style.display = "none";
