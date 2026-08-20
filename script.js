@@ -119,7 +119,7 @@ function renderArchives (manifest) {
 
         const newLi = document.createElement("li");
         newLi.innerHTML =
-        `${page.posted.slice(-2)} &emsp; <a href="#${page.slug}">${slugToTitle(page.slug)}</a>`;
+        `${page.posted.slice(-2)}: <a href="#${page.slug}">${slugToTitle(page.slug)}</a>`;
         currentUl.append(newLi);
     });
 
