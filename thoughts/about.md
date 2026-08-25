@@ -1,8 +1,6 @@
 # About me
 I'm a *run-of-the-mill* guy who has difficulty in expressing himself, hence the obscure corner was created.
 
-See what I'm all about [*currently*](#now).
-
 <br>
 
 ## About the site
