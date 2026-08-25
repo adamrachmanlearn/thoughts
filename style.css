@@ -24,9 +24,6 @@ ul.no-style-list li {
 nav a {
     margin-right: 2rem;
 }
-#main-content {
-    min-height: 33vh;
-}
 #main-content img {
     border-radius: .2rem;
 }
