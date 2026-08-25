@@ -9,7 +9,7 @@ const featuredCont = document.getElementById("featured");
 const badgeCont = document.querySelector(".badge-container");
 const darkToggle = document.getElementById("dark-toggle");
 const topButton = document.querySelector(".top");
-const hiddenPages = ["about", "archives", "now"];
+const hiddenPages = ["about", "archives"];
 
 async function getManifest () {
     const res = await fetch("./thoughts/thoughts.json");
@@ -42,21 +42,11 @@ async function renderHome (manifest) {
     scrollToTop();
 }
 
-async function renderAbout (manifest, slug) {
-    const page = manifest.find(page => page.slug === slug);
+async function renderAbout (manifest) {
+    const page = manifest.find(page => page.slug === "about");
     const content = await getContent(page.filePath);
     
     mainCont.innerHTML = content;
-
-    if (slug === "now") {
-        const spacer = document.createElement("br");
-        const newP = document.createElement("p");
-        newP.innerHTML = `<small>
-            What is a
-            <a href='https://nownownow.com/about'>/now page</a>?
-        </small>`;
-        mainCont.append(spacer, newP);
-    }
 
     adjustExtLinks(mainCont);
 
@@ -239,8 +229,8 @@ async function router () {
     if (!slug) {
         await renderHome(manifest);
         return;
-    } else if (slug === "about" || slug === "now") {
-        await renderAbout(manifest, slug);
+    } else if (slug === "about") {
+        await renderAbout(manifest);
         return;
     } else if (slug === "archives") {
         await renderArchives(manifest);
