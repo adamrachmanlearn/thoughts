@@ -8,7 +8,7 @@ I hope you get whatever you hoped for in here.
 
 <br>
 
-Currently:
+#### Current
 Playing *[Reverse: 1999]*
 Reading *[The Patron of Villains]*
 Listening *[Reason for Existence]*

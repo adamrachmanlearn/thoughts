@@ -153,7 +153,7 @@ async function renderThought (page) {
 }
 
 function renderLatest (manifest) {
-    latestCont.innerHTML = "<br>";
+    latestCont.innerHTML = "";
 
     // getting latest three thoughts
     const latest = manifest.slice(0, 3);
