@@ -94,15 +94,17 @@ function renderArchives (manifest) {
             currentYear = currentPageYear;
             // resetting month if year changed
             currentMonth = null;
-            const newH3 = document.createElement("h3");
-            newH3.textContent = currentYear;
-            mainCont.append(newH3);
+
+            // create separate year heading
+            // const newH3 = document.createElement("h3");
+            // newH3.textContent = currentYear;
+            // mainCont.append(newH3);
         }
 
         if (currentMonth !== currentPageMonth) {
             currentMonth = currentPageMonth;
             const newH5 = document.createElement("h5");
-            newH5.textContent = monthName[currentMonth];
+            newH5.textContent = `${monthName[currentMonth]}, ${currentYear}`;
             mainCont.append(newH5);
 
             // create ul for this month
