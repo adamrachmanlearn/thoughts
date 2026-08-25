@@ -156,7 +156,7 @@ function renderLatest (manifest) {
     const newHeader = document.createElement("h4");
     const newUl = document.createElement("ul");
 
-    newHeader.textContent = "Latest";
+    newHeader.textContent = "Latest thoughts";
     newUl.classList.add("no-style-list");
 
     latestCont.append(newHeader);
@@ -177,7 +177,7 @@ function renderFeatured (manifest) {
     const newHeader = document.createElement("h4");
     const newUl = document.createElement("ul");
 
-    newHeader.textContent = "Featured";
+    newHeader.textContent = "Featured thoughts";
     newUl.classList.add("no-style-list");
 
     featuredCont.append(newHeader);
@@ -194,12 +194,11 @@ function renderFeatured (manifest) {
 function renderNotFound () {
     mainCont.innerHTML = 
     `<h1>Not found</h1>
-    <br>
     <p>Page you're looking for isn't created.. at least <em>yet</em>.</p>`;
 
     latestCont.style.display = "none";
     featuredCont.style.display = "none";
-    badgeCont.style.display = "flex";
+    badgeCont.style.display = "none";
 }
 
 function formatDate (string) {
@@ -262,18 +261,18 @@ async function router () {
     const slug = window.location.hash.replace("#", "");
 
     if (!slug) {
-        await renderHome(manifest);
+        renderHome(manifest);
         return;
     } else if (slug === "about") {
-        await renderAbout(manifest);
+        renderAbout(manifest);
         return;
     } else if (slug === "archives") {
-        await renderArchives(manifest);
+        renderArchives(manifest);
         return;
     } else {
         const page = manifest.find(page => page.slug === slug);
         if (page) {
-            await renderThought(page);
+            renderThought(page);
         } else {
             renderNotFound();
         }
