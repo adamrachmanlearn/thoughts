@@ -7,6 +7,7 @@ marked.use({
 const mainCont = document.getElementById("main-content");
 const latestCont = document.getElementById("latest");
 const featuredCont = document.getElementById("featured");
+const jokeCont = document.getElementById("joke");
 const badgeCont = document.querySelector(".badge-container");
 const darkToggle = document.getElementById("dark-toggle");
 const topButton = document.querySelector(".top");
@@ -25,9 +26,10 @@ async function getContent (filePath) {
 }
 
 async function renderHome (manifest) {
-    // render latest and featured
+    // render sections
     renderLatest(manifest);
     renderFeatured(manifest);
+    renderJoke();
 
     const page = manifest.find(page => page.slug === "home");
     const content = await getContent(page.filePath);
@@ -38,6 +40,7 @@ async function renderHome (manifest) {
 
     latestCont.style.display = "block";
     featuredCont.style.display = "block";
+    jokeCont.style.display = "block";
     badgeCont.style.display = "flex";
     badgeCont.style.opacity = 1;
 
@@ -54,6 +57,7 @@ async function renderAbout (manifest) {
 
     latestCont.style.display = "none";
     featuredCont.style.display = "none";
+    jokeCont.style.display = "none";
     badgeCont.style.display = "none";
 
     scrollToTop();
@@ -123,6 +127,7 @@ function renderArchives (manifest) {
 
     latestCont.style.display = "none";
     featuredCont.style.display = "none";
+    jokeCont.style.display = "none";
     badgeCont.style.display = "none";
 
     scrollToTop();
@@ -141,6 +146,7 @@ async function renderThought (page) {
 
     latestCont.style.display = "none";
     featuredCont.style.display = "none";
+    jokeCont.style.display = "none";
     badgeCont.style.display = "none";
 
     scrollToTop();
@@ -191,6 +197,27 @@ function renderFeatured (manifest) {
     });
 }
 
+async function renderJoke () {
+    const url = "https://icanhazdadjoke.com/";
+    const res = await fetch(url, {headers: {
+        "Accept": "application/json",
+        "User-Agent": "https://adamrachmanlearn.github.io/thoughts/"
+    }});
+    if (!res.ok) throw new Error("Failed fetching joke");
+    const data = await res.json();
+    
+    jokeCont.innerHTML =
+    `<br>
+    <p class="abstract"><i>
+    "${data.joke}" -
+    <small>
+    <a href="https://icanhazdadjoke.com/">icanhazdadjoke</a>
+    </small>
+    </i></p>`
+
+    adjustExtLinks(jokeCont);
+}
+
 function renderNotFound () {
     mainCont.innerHTML = 
     `<h1>Not found</h1>
@@ -198,6 +225,7 @@ function renderNotFound () {
 
     latestCont.style.display = "none";
     featuredCont.style.display = "none";
+    jokeCont.style.display = "none";
     badgeCont.style.display = "none";
 }
 
