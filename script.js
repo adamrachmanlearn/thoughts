@@ -5,11 +5,12 @@ marked.use({
 });
 
 const mainCont = document.getElementById("main-content");
+const latestCont = document.getElementById("latest");
 const featuredCont = document.getElementById("featured");
 const badgeCont = document.querySelector(".badge-container");
 const darkToggle = document.getElementById("dark-toggle");
 const topButton = document.querySelector(".top");
-const hiddenPages = ["about", "archives"];
+const hiddenPages = ["home", "about", "archives"];
 
 async function getManifest () {
     const res = await fetch("./thoughts/thoughts.json");
@@ -24,18 +25,20 @@ async function getContent (filePath) {
 }
 
 async function renderHome (manifest) {
+    // render latest and featured
+    latestCont.innerHTML = "";
+    featuredCont.innerHTML = "";
+    renderLatest(manifest);
     renderFeatured(manifest);
-    const page = manifest[0];
+
+    const page = manifest.find(page => page.slug === "home");
     const content = await getContent(page.filePath);
 
-    mainCont.innerHTML =
-    `<h1>${slugToTitle(page.slug)}</h1>
-    <p class="author"><em>Posted on ${formatDate(page.posted)}</em></p>
-    <br>
-    ${content}`;
+    mainCont.innerHTML = content;
 
     adjustExtLinks(mainCont);
 
+    latestCont.style.display = "block";
     featuredCont.style.display = "block";
     badgeCont.style.display = "flex";
 
@@ -50,6 +53,7 @@ async function renderAbout (manifest) {
 
     adjustExtLinks(mainCont);
 
+    latestCont.style.display = "none";
     featuredCont.style.display = "none";
     badgeCont.style.display = "none";
 
@@ -113,6 +117,7 @@ function renderArchives (manifest) {
         currentUl.append(newLi);
     });
 
+    latestCont.style.display = "none";
     featuredCont.style.display = "none";
     badgeCont.style.display = "none";
 
@@ -130,20 +135,43 @@ async function renderThought (page) {
 
     adjustExtLinks(mainCont);
 
+    latestCont.style.display = "none";
     featuredCont.style.display = "none";
     badgeCont.style.display = "none";
 
     scrollToTop();
 }
 
-function renderFeatured (manifest) {
-    featuredCont.innerHTML = "<br>";
-    const featured = manifest.filter(page => page.metaTag === "featured");
+function renderLatest (manifest) {
+    latestCont.innerHTML = "<br>";
+    // getting latest three thoughts
+    const latest = manifest.slice(0, 3);
 
-    const newHeader = document.createElement("h3");
+    const newHeader = document.createElement("h4");
     const newUl = document.createElement("ul");
 
-    newHeader.textContent = "Featured thoughts";
+    newHeader.textContent = "Latest";
+    newUl.classList.add("no-style-list");
+
+    latestCont.append(newHeader);
+    latestCont.append(newUl);
+
+    latest.forEach(page => {
+        const newLi = document.createElement("li");
+        newLi.innerHTML =
+        `<a href="#${page.slug}">${slugToTitle(page.slug)}</a>`
+        newUl.append(newLi);
+    });
+}
+
+function renderFeatured (manifest) {
+    // featuredCont.innerHTML = "<br>";
+    const featured = manifest.filter(page => page.metaTag === "featured");
+
+    const newHeader = document.createElement("h4");
+    const newUl = document.createElement("ul");
+
+    newHeader.textContent = "Featured";
     newUl.classList.add("no-style-list");
 
     featuredCont.append(newHeader);
@@ -163,6 +191,7 @@ function renderNotFound () {
     <br>
     <p>Page you're looking for isn't created.. at least <em>yet</em>.</p>`;
 
+    latestCont.style.display = "none";
     featuredCont.style.display = "none";
     badgeCont.style.display = "flex";
 }

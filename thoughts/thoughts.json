@@ -84,12 +84,12 @@
         "filePath": "./thoughts/theactualreasonyoudothings.md"
     },
     {
-        "slug": "about",
-        "filePath": "./thoughts/about.md"
+        "slug": "home",
+        "filePath": "./thoughts/home.md"
     },
     {
-        "slug": "now",
-        "filePath": "./thoughts/now.md"
+        "slug": "about",
+        "filePath": "./thoughts/about.md"
     },
     {
         "slug": "archives"
