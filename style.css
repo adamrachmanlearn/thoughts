@@ -46,6 +46,11 @@ nav a {
 .badge-container .classic-badge{
     height: 31px;
 }
+.list-div {
+    padding: 0;
+    display: flex;
+    gap: .4rem;
+}
 
 /* removes trailing underline on touchscreen */
 @media (hover: none) {
