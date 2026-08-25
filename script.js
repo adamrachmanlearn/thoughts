@@ -26,8 +26,6 @@ async function getContent (filePath) {
 
 async function renderHome (manifest) {
     // render latest and featured
-    latestCont.innerHTML = "";
-    featuredCont.innerHTML = "";
     renderLatest(manifest);
     renderFeatured(manifest);
 
@@ -150,6 +148,7 @@ async function renderThought (page) {
 
 function renderLatest (manifest) {
     latestCont.innerHTML = "<br>";
+
     // getting latest three thoughts
     const latest = manifest.slice(0, 3);
 
@@ -171,7 +170,8 @@ function renderLatest (manifest) {
 }
 
 function renderFeatured (manifest) {
-    // featuredCont.innerHTML = "<br>";
+    featuredCont.innerHTML = "";
+
     const featured = manifest.filter(page => page.metaTag === "featured");
 
     const newHeader = document.createElement("h4");
