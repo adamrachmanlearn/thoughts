@@ -209,7 +209,7 @@ async function renderJoke () {
     jokeCont.innerHTML =
     `<br>
     <p class="abstract"><i>
-    "${data.joke}" -
+    ${data.joke} -
     <small>
     <a href="https://icanhazdadjoke.com/">icanhazdadjoke</a>
     </small>
