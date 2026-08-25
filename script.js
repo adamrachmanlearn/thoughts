@@ -9,7 +9,7 @@ const latestCont = document.getElementById("latest");
 const featuredCont = document.getElementById("featured");
 const jokeCont = document.getElementById("joke");
 const badgeCont = document.querySelector(".badge-container");
-const darkToggle = document.getElementById("dark-toggle");
+const darkToggle = document.querySelector(".toggle");
 const topButton = document.querySelector(".top");
 const hiddenPages = ["home", "about", "archives"];
 
