@@ -55,6 +55,7 @@ nav a {
 @media (hover: none) {
     a:hover {
         text-decoration: underline dashed;
+        text-decoration-thickness: 1px;
     }
 }
 
