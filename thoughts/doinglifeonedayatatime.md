@@ -14,7 +14,7 @@ Then this one guy approaches, *“hey, what are you gonna do in the next hours? 
 
 <br>
 
-Yeah.. haha, great for you! Wouldn’t it be great if I can *at least* stay f\*ck\*ng afloat to be able to a even plan ahead?
+Yeah.. haha, great for you! Wouldn’t it be great if I can *at least* stay f\*cking afloat to be able to a even plan ahead?
 
 <br>
 
