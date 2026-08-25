@@ -48,13 +48,18 @@ nav a {
     }
 }
 /* adjust margin according to smaller screen sizes */
-@media (max-width: 500px) {
+@media (max-width: 480px) {
     nav a {
-        margin-right: 1.5rem;
+        margin-right: 1vw;
     }
 }
-@media (max-width: 455px) {
+@media (min-width: 481px) {
     nav a {
-        margin-right: .4rem;
+        margin-right: 8vw;
+    }
+}
+@media (min-width: 768px) {
+    nav a {
+        margin-right: 4rem;
     }
 }
