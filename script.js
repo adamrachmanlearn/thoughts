@@ -41,6 +41,7 @@ async function renderHome (manifest) {
     latestCont.style.display = "block";
     featuredCont.style.display = "block";
     badgeCont.style.display = "flex";
+    badgeCont.style.opacity = 1;
 
     scrollToTop();
 }
