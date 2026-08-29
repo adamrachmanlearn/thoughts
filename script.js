@@ -178,7 +178,7 @@ function renderLatest (manifest) {
 function renderFeatured (manifest) {
     featuredCont.innerHTML = "";
 
-    const featured = manifest.filter(page => page.metaTag === "featured");
+    const featured = manifest.filter(page => page.metaTag.includes("featured"));
 
     const newHeader = document.createElement("h4");
     const newUl = document.createElement("ul");

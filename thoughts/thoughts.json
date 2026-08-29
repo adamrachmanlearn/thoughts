@@ -1,109 +1,112 @@
 [
     {
         "slug": "fascinated-by-boxing",
-        "metaTag": "",
+        "metaTag": [],
         "posted": "2026-08-27",
         "filePath": "./thoughts/fascinatedbyboxing.md"
     },
     {
         "slug": "slow-progress",
-        "metaTag": "",
+        "metaTag": [],
         "posted": "2026-08-25",
         "filePath": "./thoughts/slowprogress.md"
     },
     {
         "slug": "end-of-a-life",
-        "metaTag": "",
+        "metaTag": [],
         "posted": "2026-08-20",
         "filePath": "./thoughts/endofalife.md"
     },
     {
         "slug": "my-sincere-apology",
-        "metaTag": "",
+        "metaTag": [],
         "posted": "2026-08-17",
         "filePath": "./thoughts/mysincereapology.md"
     },
     {
         "slug": "respect-the-distance",
-        "metaTag": "",
+        "metaTag": [],
         "posted": "2026-08-15",
         "filePath": "./thoughts/respectthedistance.md"
     },
     {
         "slug": "weary-of-life",
-        "metaTag": "",
+        "metaTag": [],
         "posted": "2026-08-14",
         "filePath": "./thoughts/wearyoflife.md"
     },
     {
         "slug": "silly-ways-to-stay-on-top-of-exercise",
-        "metaTag": "",
+        "metaTag": [],
         "posted": "2026-08-09",
         "filePath": "./thoughts/sillywaystostayontopofexercise.md"
     },
     {
         "slug": "i-was-searching-for-perfection,-found-enlightenment-instead",
-        "metaTag": "",
+        "metaTag": [],
         "posted": "2026-08-07",
         "filePath": "./thoughts/iwassearchingforperfectionfoundenlightenmentinstead.md"
     },
     {
         "slug": "gacha-games-unironically-taught-me-to-be-frugal",
-        "metaTag": "",
+        "metaTag": [],
         "posted": "2026-08-02",
         "filePath": "./thoughts/gachagamesunironicallytaughtmetobefrugal.md"
     },
     {
         "slug": "expanded-horizon",
-        "metaTag": "",
+        "metaTag": [],
         "posted": "2026-08-01",
         "filePath": "./thoughts/expandedhorizon.md"
     },
     {
         "slug": "how-stepping-back-from-things-helped-me",
-        "metaTag": "featured",
+        "metaTag": [],
         "posted": "2026-07-31",
         "filePath": "./thoughts/howsteppingbackfromthingshelpedme.md"
     },
     {
         "slug": "doing-life-one-day-at-a-time",
-        "metaTag": "featured",
+        "metaTag": ["featured"],
         "posted": "2026-07-29",
         "filePath": "./thoughts/doinglifeonedayatatime.md"
     },
     {
         "slug": "why-my-best-runs-are-often-the-slowest",
-        "metaTag": "",
+        "metaTag": [],
         "posted": "2026-07-28",
         "filePath": "./thoughts/whymybestrunsareoftentheslowest.md"
     },
     {
         "slug": "work-in-iterations",
-        "metaTag": "featured",
+        "metaTag": ["featured"],
         "posted": "2026-07-27",
         "filePath": "./thoughts/workiniterations.md"
     },
     {
         "slug": "why-i-love-calisthenics",
-        "metaTag": "",
+        "metaTag": [],
         "posted": "2026-07-26",
         "filePath": "./thoughts/whyilovecalisthenics.md"
     },
     {
         "slug": "the-actual-reason-you-do-things",
-        "metaTag": "featured",
+        "metaTag": ["featured"],
         "posted": "2026-07-25",
         "filePath": "./thoughts/theactualreasonyoudothings.md"
     },
     {
         "slug": "home",
+        "metaTag": [],
         "filePath": "./thoughts/home.md"
     },
     {
         "slug": "about",
+        "metaTag": [],
         "filePath": "./thoughts/about.md"
     },
     {
-        "slug": "archives"
+        "slug": "archives",
+        "metaTag": []
     }
 ]
