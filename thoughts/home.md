@@ -11,9 +11,9 @@ I hope you get whatever you hoped for in here.
 #### Current
 <small>Last updated: Aug 27, 2026</small>
 
-🎮 Playing [Reverse: 1999]
-🎵 Listening [Reason for Existence]
-📖 Reading:
+Playing [Reverse: 1999]
+Listening [Reason for Existence]
+Reading:
 * [The Patron of Villains]
 * [Immune: a Journey into the Mysterious System that Keeps You Alive]
 
