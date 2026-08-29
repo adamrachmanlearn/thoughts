@@ -15,7 +15,3 @@ Anyway, if I ever do actually create it, I think I'll just use platform I alread
 <br>
 
 Yeah anyway, that's it. Good day everyone!
-
-<br>
-
-\*P.S: the list would consist of *anything* readable, let alone fiction, I'll put comic, manga, manhwa, manhua, internet articles, jokes, personal opinion, social media post, research, anything.. anything that would fascinates me, it is my list afterall (lol).
