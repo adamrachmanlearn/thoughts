@@ -2,7 +2,7 @@ As you can see, recently I've added a section that shows current things I've bee
 
 <br>
 
-Now, unlike other things, I think this one is quite special, because I've been wanting to *read more* for the longest time. In my opinion reading is one of those things that belongs to the likes of eating healthy, exercising, studying, etc, you get the point (well, maybe the correct term would be self-improvement, but I personally don't like the term so much, so yeah lol).
+Now, unlike other things, I think this one is quite special, because I've been wanting to *read more* for the longest time. In my opinion reading is one of those things that belongs to the likes of eating healthy, exercising, studying, etc, you get the point (well, maybe the correct term would be self-improvement lol).
 
 <br>
 
@@ -15,3 +15,7 @@ Anyway, if I ever do actually create it, I think I'll just use platform I alread
 <br>
 
 Yeah anyway, that's it. Good day everyone!
+
+<br>
+
+\*P.S: I ended up create it (lol), you could see it at home page > current section > reading list
