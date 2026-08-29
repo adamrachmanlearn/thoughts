@@ -13,11 +13,8 @@ I hope you get whatever you hoped for in here.
 
 Playing [Reverse: 1999]
 Listening [Reason for Existence]
-Reading:
-* [The Patron of Villains]
-* [Immune: a Journey into the Mysterious System that Keeps You Alive]
+Reading: [Reading list »]
 
 [Reverse: 1999]: https://re1999.bluepoch.com/en/home/
-[The Patron of Villains]: https://myanimelist.net/manga/188109/The_Patron_of_Villains?q=patron&cat=manga
-[Immune: a Journey into the Mysterious System that Keeps You Alive]: https://www.goodreads.com/book/show/57423646-immune
 [Reason for existence]: https://www.shazam.com/song/1604285506/reason-for-existence
+[Reading list »]: https://incetera.notion.site/reading-list-3cb24287341380a58559d59e14c3f2ba?source=copy_link
