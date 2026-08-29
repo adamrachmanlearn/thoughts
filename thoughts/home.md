@@ -13,7 +13,7 @@ I hope you get whatever you hoped for in here.
 
 Playing [Reverse: 1999]
 Listening [Reason for Existence]
-Reading: [Reading list »]
+[Reading list »]
 
 [Reverse: 1999]: https://re1999.bluepoch.com/en/home/
 [Reason for existence]: https://www.shazam.com/song/1604285506/reason-for-existence
