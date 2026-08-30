@@ -45,10 +45,10 @@ async function renderHome (manifest) {
     renderFeatured(manifest);
     renderBadges();
 
-    // make footer visible
-    document.querySelector("footer").style.display = "block";
-
     adjustExtLinks(mainContent);
+
+    // make footer visible AFTER all content loaded
+    document.querySelector("footer").style.display = "block";
 
     scrollToTop();
 }
@@ -126,6 +126,9 @@ async function renderAbout (manifest) {
 
     adjustExtLinks(mainContent);
 
+    // make footer visible AFTER all content loaded
+    document.querySelector("footer").style.display = "block";
+
     scrollToTop();
 }
 
@@ -173,6 +176,9 @@ function renderArchives (manifest) {
 
     adjustExtLinks(mainContent);
 
+    // make footer visible AFTER all content loaded
+    document.querySelector("footer").style.display = "block";
+
     scrollToTop();
 }
 
@@ -189,6 +195,9 @@ async function renderThought (page) {
 
     adjustExtLinks(mainContent);
 
+    // make footer visible AFTER all content loaded
+    document.querySelector("footer").style.display = "block";
+
     scrollToTop();
 }
 
@@ -201,6 +210,9 @@ function renderNotFound () {
     renderBadges();
 
     adjustExtLinks(mainContent);
+
+    // make footer visible AFTER all content loaded
+    document.querySelector("footer").style.display = "block";
 
     scrollToTop();
 }
