@@ -5,7 +5,7 @@ marked.use({
 });
 
 const mainContent = document.getElementById("main-content");
-const topButton = document.querySelector(".top");
+const btnTop = document.querySelector(".top");
 const fullMonthName = [
     null,
     "January",
@@ -183,23 +183,29 @@ async function renderThought (page) {
 
 function renderNotFound () {
     mainContent.innerHTML = 
-    `<h1>Not found</h1>
+    `<h2>Not found</h2>
+    <br>
     <p>Page you're looking for isn't created.. at least <em>yet</em>.</p>`;
 }
 
-function formatDate (string) {
-    // getting individual var from "2026-01-01"
-    const [year, month, day] = string.split("-");
+function adjustExtLinks (container) {
+    container.querySelectorAll("a").forEach(link => {
+        if (link.getAttribute("href").startsWith("http")) {
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+        }
+    })
+}
 
-    // create new date obj, month - 1 because js use 0 index month
-    const date = new Date(year, month - 1, day);
+function formatDate (dateStr) {
+    // getting individual var from "2000-01-01" format
+    const [year, month, day] = dateStr.split("-");
 
-    // returning new date format
-    return new Intl.DateTimeFormat("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric"
-    }).format(date);
+    return `
+    ${fullMonthName[parseInt(month)].slice(0, 3)}
+    ${parseInt(day)},
+    ${year}
+    `
 }
 
 function slugToTitle (string) {
@@ -219,16 +225,7 @@ function scrollToTop (behavior) {
     window.scrollTo({top: 0, behavior: behavior});
 }
 
-topButton.addEventListener("click", () => scrollToTop("smooth"));
-
-function adjustExtLinks (container) {
-    container.querySelectorAll("a").forEach(link => {
-        if (link.getAttribute("href").startsWith("http")) {
-            link.target = "_blank";
-            link.rel = "noopener noreferrer";
-        }
-    })
-}
+btnTop.addEventListener("click", () => scrollToTop("smooth"));
 
 async function router () {
     const manifest = await getManifest();
