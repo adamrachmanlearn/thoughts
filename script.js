@@ -4,10 +4,7 @@ marked.use({
     breaks: true
 });
 
-const mainCont = document.getElementById("main-content");
-const latestCont = document.getElementById("latest");
-const featuredCont = document.getElementById("featured");
-const badgeCont = document.querySelector(".badge-container");
+const mainContent = document.getElementById("main-content");
 const topButton = document.querySelector(".top");
 const hiddenPages = ["home", "about", "archives"];
 
@@ -24,36 +21,91 @@ async function getContent (filePath) {
 }
 
 async function renderHome (manifest) {
-    // render sections
-    renderLatest(manifest);
-    renderFeatured(manifest);
-
     const page = manifest.find(page => page.slug === "home");
     const content = await getContent(page.filePath);
 
-    mainCont.innerHTML = content;
+    mainContent.innerHTML = content;
 
-    adjustExtLinks(mainCont);
+    // render sections
+    renderLatest(manifest);
+    renderFeatured(manifest);
+    renderBadges();
 
-    latestCont.style.display = "block";
-    featuredCont.style.display = "block";
-    badgeCont.style.display = "flex";
-    badgeCont.style.opacity = 1;
+    adjustExtLinks(mainContent);
 
     scrollToTop();
+}
+
+function renderLatest (manifest) {
+    // getting latest three thoughts
+    const latestThoughts = manifest.slice(0, 3);
+
+    const newSection = document.createElement("section");
+    const newHeader = document.createElement("h4");
+    const newUl = document.createElement("ul");
+
+    newHeader.textContent = "Latest thoughts";
+    newUl.classList.add("no-style-list");
+
+    newSection.append(newHeader);
+    newSection.append(newUl);
+
+    latestThoughts.forEach(thought => {
+        const newLi = document.createElement("li");
+        newLi.innerHTML =
+        `<a href="#${thought.slug}">${slugToTitle(thought.slug)}</a>`
+        newUl.append(newLi);
+    });
+
+    mainContent.append(newSection);
+}
+
+function renderFeatured (manifest) {
+    const featuredThoughts = manifest.filter(page => page.metaTag.includes("featured"));
+
+    const newSection = document.createElement("section");
+    const newHeader = document.createElement("h4");
+    const newUl = document.createElement("ul");
+
+    newHeader.textContent = "Featured thoughts";
+    newUl.classList.add("no-style-list");
+
+    newSection.append(newHeader);
+    newSection.append(newUl);
+
+    featuredThoughts.forEach(thought => {
+        const newLi = document.createElement("li");
+        newLi.innerHTML =
+        `<a href="#${thought.slug}">${slugToTitle(thought.slug)}</a>`
+        newUl.append(newLi);
+    });
+
+    mainContent.append(newSection);
+}
+
+function renderBadges () {
+    const newSection = document.createElement("section");
+    newSection.classList.add("badge-container");
+    newSection.innerHTML =
+        `
+        <img class="classic-badge" src="./assets/badges/human-not-ai.svg" alt="Written by Human Not AI" />
+        <img src="./assets/badges/github-pages.svg" alt="GitHub pages" />
+        <img src="./assets/badges/html.svg" alt="HTML" />
+        <img src="./assets/badges/css.svg" alt="CSS" />
+        <img src="./assets/badges/js.svg" alt="JavaScript" />
+        <img src="./assets/badges/anime-blink.gif" alt="Anime blinking" />
+        `;
+        
+    mainContent.append(newSection);
 }
 
 async function renderAbout (manifest) {
     const page = manifest.find(page => page.slug === "about");
     const content = await getContent(page.filePath);
     
-    mainCont.innerHTML = content;
+    mainContent.innerHTML = content;
 
-    adjustExtLinks(mainCont);
-
-    latestCont.style.display = "none";
-    featuredCont.style.display = "none";
-    badgeCont.style.display = "none";
+    adjustExtLinks(mainContent);
 
     scrollToTop();
 }
@@ -79,7 +131,7 @@ function renderArchives (manifest) {
     // global var to refer to ul
     let currentUl;
 
-    mainCont.innerHTML = "<h1>Archives</h1>";
+    mainContent.innerHTML = "<h1>Archives</h1>";
 
     // only return slug that doesn't included in hiddenPages arr
     const pages = manifest.filter (page => !hiddenPages.includes(page.slug));
@@ -96,19 +148,19 @@ function renderArchives (manifest) {
             // create separate year heading
             // const newH3 = document.createElement("h3");
             // newH3.textContent = currentYear;
-            // mainCont.append(newH3);
+            // mainContent.append(newH3);
         }
 
         if (currentMonth !== currentPageMonth) {
             currentMonth = currentPageMonth;
             const newH5 = document.createElement("h5");
             newH5.textContent = `${monthName[currentMonth]}, ${currentYear}`;
-            mainCont.append(newH5);
+            mainContent.append(newH5);
 
             // create ul for this month
             currentUl = document.createElement("ul");
             currentUl.classList.add("no-style-list");
-            mainCont.append(currentUl);
+            mainContent.append(currentUl);
         }
 
         const newLi = document.createElement("li");
@@ -120,84 +172,27 @@ function renderArchives (manifest) {
         currentUl.append(newLi);
     });
 
-    latestCont.style.display = "none";
-    featuredCont.style.display = "none";
-    badgeCont.style.display = "none";
-
     scrollToTop();
 }
 
 async function renderThought (page) {
     const content = await getContent(page.filePath);
 
-    mainCont.innerHTML =
+    mainContent.innerHTML =
     `<h1>${slugToTitle(page.slug)}</h1>
     <p class="author"><em>Posted on ${formatDate(page.posted)}</em></p>
     <br>
     ${content}`;
 
-    adjustExtLinks(mainCont);
-
-    latestCont.style.display = "none";
-    featuredCont.style.display = "none";
-    badgeCont.style.display = "none";
+    adjustExtLinks(mainContent);
 
     scrollToTop();
 }
 
-function renderLatest (manifest) {
-    latestCont.innerHTML = "";
-
-    // getting latest three thoughts
-    const latest = manifest.slice(0, 3);
-
-    const newHeader = document.createElement("h4");
-    const newUl = document.createElement("ul");
-
-    newHeader.textContent = "Latest thoughts";
-    newUl.classList.add("no-style-list");
-
-    latestCont.append(newHeader);
-    latestCont.append(newUl);
-
-    latest.forEach(page => {
-        const newLi = document.createElement("li");
-        newLi.innerHTML =
-        `<a href="#${page.slug}">${slugToTitle(page.slug)}</a>`
-        newUl.append(newLi);
-    });
-}
-
-function renderFeatured (manifest) {
-    featuredCont.innerHTML = "";
-
-    const featured = manifest.filter(page => page.metaTag.includes("featured"));
-
-    const newHeader = document.createElement("h4");
-    const newUl = document.createElement("ul");
-
-    newHeader.textContent = "Featured thoughts";
-    newUl.classList.add("no-style-list");
-
-    featuredCont.append(newHeader);
-    featuredCont.append(newUl);
-
-    featured.forEach(page => {
-        const newLi = document.createElement("li");
-        newLi.innerHTML =
-        `<a href="#${page.slug}">${slugToTitle(page.slug)}</a>`
-        newUl.append(newLi);
-    });
-}
-
 function renderNotFound () {
-    mainCont.innerHTML = 
+    mainContent.innerHTML = 
     `<h1>Not found</h1>
     <p>Page you're looking for isn't created.. at least <em>yet</em>.</p>`;
-
-    latestCont.style.display = "none";
-    featuredCont.style.display = "none";
-    badgeCont.style.display = "none";
 }
 
 function formatDate (string) {

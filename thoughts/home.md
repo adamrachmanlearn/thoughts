@@ -1,4 +1,4 @@
-### Hello, there.
+## Hello, there.
 
 <br>
 
@@ -6,9 +6,8 @@ This is where I write things that crossed my mind at some point, **that's litera
 
 I hope you get whatever you hoped for in here.
 
-<br>
-
 #### Current
+
 <small>Last updated: Aug 29, 2026</small>
 
 Playing [Reverse: 1999]
