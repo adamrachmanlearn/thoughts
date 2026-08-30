@@ -171,8 +171,8 @@ async function renderThought (page) {
     const content = await getContent(page.filePath);
 
     mainContent.innerHTML =
-    `<h1>${slugToTitle(page.slug)}</h1>
-    <p class="author"><em>Posted on ${formatDate(page.posted)}</em></p>
+    `<h2>${slugToTitle(page.slug)}</h2>
+    <p><small>Posted on ${formatDate(page.posted)}</small></p>
     <br>
     ${content}`;
 
