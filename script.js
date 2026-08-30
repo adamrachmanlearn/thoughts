@@ -119,6 +119,8 @@ async function renderAbout (manifest) {
     
     mainContent.innerHTML = content;
 
+    renderBadges();
+
     adjustExtLinks(mainContent);
 
     scrollToTop();
@@ -164,6 +166,10 @@ function renderArchives (manifest) {
         currentUl.append(newLi);
     });
 
+    renderBadges();
+
+    adjustExtLinks(mainContent);
+
     scrollToTop();
 }
 
@@ -176,6 +182,8 @@ async function renderThought (page) {
     <br>
     ${content}`;
 
+    renderBadges();
+
     adjustExtLinks(mainContent);
 
     scrollToTop();
@@ -186,6 +194,12 @@ function renderNotFound () {
     `<h2>Not found</h2>
     <br>
     <p>Page you're looking for isn't created.. at least <em>yet</em>.</p>`;
+
+    renderBadges();
+
+    adjustExtLinks(mainContent);
+
+    scrollToTop();
 }
 
 function adjustExtLinks (container) {
@@ -195,17 +209,6 @@ function adjustExtLinks (container) {
             link.rel = "noopener noreferrer";
         }
     })
-}
-
-function formatDate (dateStr) {
-    // getting individual var from "2000-01-01" format
-    const [year, month, day] = dateStr.split("-");
-
-    return `
-    ${fullMonthName[parseInt(month)].slice(0, 3)}
-    ${parseInt(day)},
-    ${year}
-    `
 }
 
 function slugToTitle (string) {
@@ -220,12 +223,21 @@ function slugToTitle (string) {
         .replace(/\bi\b/gi, "I");
 }
 
+function formatDate (dateStr) {
+    // getting individual var from "2000-01-01" format
+    const [year, month, day] = dateStr.split("-");
+
+    return `
+    ${fullMonthName[parseInt(month)].slice(0, 3)}
+    ${parseInt(day)},
+    ${year}
+    `
+}
+
 function scrollToTop (behavior) {
     if (behavior === undefined) behavior = "instant";
     window.scrollTo({top: 0, behavior: behavior});
 }
-
-btnTop.addEventListener("click", () => scrollToTop("smooth"));
 
 async function router () {
     const manifest = await getManifest();
@@ -249,6 +261,8 @@ async function router () {
         }
     }
 }
+
+btnTop.addEventListener("click", () => scrollToTop("smooth"));
 
 window.addEventListener("DOMContentLoaded", router);
 window.addEventListener("hashchange", router);
