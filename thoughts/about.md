@@ -1,9 +1,9 @@
-# About me
+## About me
+
 I'm a *run-of-the-mill* guy who has difficulty in expressing himself, hence the obscure corner was created.
 
-<br>
+#### About the site
 
-## About the site
 This site is *not* a valid representative of *anything* that has ever written at, *even* the author.
 
 It’s *not* something you should quote me on, cite at, or even more so.. to accept it at face value, *always* take it with a *grain of salt*.
