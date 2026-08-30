@@ -20,7 +20,7 @@ ul.no-style-list li {
     list-style: none;
 }
 nav a {
-    margin-right: 2rem;
+    margin-right: min(2vw, 1rem);
 }
 #main-content img {
     border-radius: .2rem;
@@ -53,22 +53,5 @@ nav a {
 @media (hover: none) {
     a:hover {
         text-decoration: none;
-    }
-}
-
-/* adjust margin according to smaller screen sizes */
-@media (max-width: 480px) {
-    nav a {
-        margin-right: 1vw;
-    }
-}
-@media (min-width: 481px) {
-    nav a {
-        margin-right: 8vw;
-    }
-}
-@media (min-width: 768px) {
-    nav a {
-        margin-right: 4rem;
     }
 }
