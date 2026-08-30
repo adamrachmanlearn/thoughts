@@ -1,6 +1,9 @@
 html {
     font-size: 18px;
 }
+footer {
+    display: none;
+}
 a {
     color: #8fbcbb;
     text-decoration: none;

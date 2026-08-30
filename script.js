@@ -45,6 +45,9 @@ async function renderHome (manifest) {
     renderFeatured(manifest);
     renderBadges();
 
+    // make footer visible
+    document.querySelector("footer").style.display = "block";
+
     adjustExtLinks(mainContent);
 
     scrollToTop();
