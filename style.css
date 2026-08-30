@@ -2,11 +2,8 @@ html {
     font-size: 18px;
 }
 a {
-    color: #5e81ac;
-    text-decoration: none;
-}
-body.latex-dark a {
     color: #8fbcbb;
+    text-decoration: none;
 }
 a:hover {
     text-decoration: underline;
