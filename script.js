@@ -9,7 +9,6 @@ const latestCont = document.getElementById("latest");
 const featuredCont = document.getElementById("featured");
 const jokeCont = document.getElementById("joke");
 const badgeCont = document.querySelector(".badge-container");
-const darkToggle = document.querySelector(".toggle");
 const topButton = document.querySelector(".top");
 const hiddenPages = ["home", "about", "archives"];
 
@@ -260,18 +259,6 @@ function scrollToTop (behavior) {
     if (behavior === undefined) behavior = "instant";
     window.scrollTo({top: 0, behavior: behavior});
 }
-
-darkToggle.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    document.body.classList.toggle("latex-dark");
-
-    if (darkToggle.innerHTML === "light/<b>dark</b>") {
-        darkToggle.innerHTML = "<b>light</b>/dark";
-    } else {
-        darkToggle.innerHTML = "light/<b>dark</b>";
-    }
-});
 
 topButton.addEventListener("click", () => scrollToTop("smooth"));
 
