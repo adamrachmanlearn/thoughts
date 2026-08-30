@@ -6,7 +6,21 @@ marked.use({
 
 const mainContent = document.getElementById("main-content");
 const topButton = document.querySelector(".top");
-const hiddenPages = ["home", "about", "archives"];
+const fullMonthName = [
+    null,
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+];
 
 async function getManifest () {
     const res = await fetch("./thoughts/thoughts.json");
@@ -95,7 +109,7 @@ function renderBadges () {
         <img src="./assets/badges/js.svg" alt="JavaScript" />
         <img src="./assets/badges/anime-blink.gif" alt="Anime blinking" />
         `;
-        
+
     mainContent.append(newSection);
 }
 
@@ -111,51 +125,29 @@ async function renderAbout (manifest) {
 }
 
 function renderArchives (manifest) {
-    const monthName = [
-        "",
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    ];
     let currentYear;
     let currentMonth;
-    // global var to refer to ul
     let currentUl;
 
-    mainContent.innerHTML = "<h1>Archives</h1>";
+    mainContent.innerHTML = "<h2>Archives</h2>";
 
-    // only return slug that doesn't included in hiddenPages arr
-    const pages = manifest.filter (page => !hiddenPages.includes(page.slug));
+    const thoughts = manifest.filter (thought => !thought.metaTag.includes("hidden"));
 
-    pages.forEach(page => {
-        let currentPageYear = page.posted.slice(0, 4);
-        let currentPageMonth = Number(page.posted.slice(5, 7));
+    thoughts.forEach(thought => {
+        let currentThoughtYear = thought.posted.slice(0, 4);
+        let currentThoughtMonth = Number(thought.posted.slice(5, 7));
 
-        if (currentYear !== currentPageYear) {
-            currentYear = currentPageYear;
+        if (currentYear !== currentThoughtYear) {
+            currentYear = currentThoughtYear;
             // resetting month if year changed
             currentMonth = null;
-
-            // create separate year heading
-            // const newH3 = document.createElement("h3");
-            // newH3.textContent = currentYear;
-            // mainContent.append(newH3);
         }
 
-        if (currentMonth !== currentPageMonth) {
-            currentMonth = currentPageMonth;
-            const newH5 = document.createElement("h5");
-            newH5.textContent = `${monthName[currentMonth]}, ${currentYear}`;
-            mainContent.append(newH5);
+        if (currentMonth !== currentThoughtMonth) {
+            currentMonth = currentThoughtMonth;
+            const newHeader = document.createElement("h4");
+            newHeader.textContent = `${fullMonthName[currentMonth]}, ${currentYear}`;
+            mainContent.append(newHeader);
 
             // create ul for this month
             currentUl = document.createElement("ul");
@@ -166,8 +158,8 @@ function renderArchives (manifest) {
         const newLi = document.createElement("li");
         newLi.innerHTML =
         `<div class="list-div">
-        ${page.posted.slice(-2)}
-        <a href="#${page.slug}">${slugToTitle(page.slug)}</a>
+        ${thought.posted.slice(-2)}
+        <a href="#${thought.slug}">${slugToTitle(thought.slug)}</a>
         </div>`;
         currentUl.append(newLi);
     });

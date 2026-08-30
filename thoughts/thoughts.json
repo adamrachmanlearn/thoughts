@@ -103,16 +103,16 @@
     },
     {
         "slug": "home",
-        "metaTag": [],
+        "metaTag": ["hidden"],
         "filePath": "./thoughts/home.md"
     },
     {
         "slug": "about",
-        "metaTag": [],
+        "metaTag": ["hidden"],
         "filePath": "./thoughts/about.md"
     },
     {
         "slug": "archives",
-        "metaTag": []
+        "metaTag": ["hidden"]
     }
 ]
