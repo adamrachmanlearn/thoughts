@@ -2,7 +2,7 @@
 
 <br>
 
-I'm a *run-of-the-mill* guy who has difficulty in expressing himself, hence the obscure corner was created.
+I'm a *run-of-the-mill* guy who has difficulty in expressing himself, hence this obscure corner was created.
 
 #### About the site
 
