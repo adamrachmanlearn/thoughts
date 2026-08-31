@@ -6,6 +6,8 @@ marked.use({
 
 const mainContent = document.getElementById("main-content");
 const btnTop = document.querySelector(".top");
+const thoughtPrefix = "./content/thoughts/";
+const pagePrefix = "./content/pages/";
 const fullMonthName = [
     null,
     "January",
@@ -23,12 +25,17 @@ const fullMonthName = [
 ];
 
 async function getManifest () {
-    const res = await fetch("./thoughts/thoughts.json");
+    const res = await fetch("./content/manifest.json");
     if (!res.ok) throw new Error("Failed fetching manifest");
     return await res.json();
 }
 
-async function getContent (filePath) {
+async function getContent (filePath, type) {
+    // cond ? true : false
+    type === "thought" ?
+        filePath = `${thoughtPrefix}${filePath}` :
+        filePath = `${pagePrefix}${filePath}`
+
     const res = await fetch(filePath);
     if (!res.ok) throw new Error("Failed fetching content");
     return marked.parse(await res.text());
@@ -36,7 +43,7 @@ async function getContent (filePath) {
 
 async function renderHome (manifest) {
     const page = manifest.find(page => page.slug === "home");
-    const content = await getContent(page.filePath);
+    const content = await getContent(page.fileName, "page");
 
     mainContent.innerHTML = content;
 
@@ -54,7 +61,7 @@ async function renderHome (manifest) {
 }
 
 function renderLatest (manifest) {
-    // getting latest three thoughts
+    // getting latest three
     const latestThoughts = manifest.slice(0, 3);
 
     const newSection = document.createElement("section");
@@ -105,12 +112,12 @@ function renderBadges () {
     newSection.classList.add("badge-container");
     newSection.innerHTML =
         `
-        <img class="classic-badge" src="./assets/badges/human-not-ai.svg" alt="Written by Human Not AI" />
-        <img src="./assets/badges/github-pages.svg" alt="GitHub pages" />
-        <img src="./assets/badges/html.svg" alt="HTML" />
-        <img src="./assets/badges/css.svg" alt="CSS" />
-        <img src="./assets/badges/js.svg" alt="JavaScript" />
-        <img src="./assets/badges/anime-blink.gif" alt="Anime blinking" />
+        <img class="big-badge" src="./assets/badges/by-human.svg" alt="Made by human badge" />
+        <img src="./assets/badges/github-pages.svg" alt="GitHub pages badge" />
+        <img src="./assets/badges/html.svg" alt="HTML badge" />
+        <img src="./assets/badges/css.svg" alt="CSS badge" />
+        <img src="./assets/badges/js.svg" alt="JavaScript badge" />
+        <img src="./assets/badges/anime-blink.gif" alt="Anime blinking badge" />
         `;
 
     mainContent.append(newSection);
@@ -118,7 +125,7 @@ function renderBadges () {
 
 async function renderAbout (manifest) {
     const page = manifest.find(page => page.slug === "about");
-    const content = await getContent(page.filePath);
+    const content = await getContent(page.fileName, "page");
     
     mainContent.innerHTML = content;
 
@@ -183,7 +190,7 @@ function renderArchives (manifest) {
 }
 
 async function renderThought (page) {
-    const content = await getContent(page.filePath);
+    const content = await getContent(page.fileName, "thought");
 
     mainContent.innerHTML =
     `<h2>${slugToTitle(page.slug)}</h2>
