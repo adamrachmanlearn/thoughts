@@ -9,7 +9,6 @@ This is where I write things that crossed my mind at some point, **that's litera
 Playing: [Reverse: 1999]
 Listening: [Reason for Existence]
 Reading: [List »]
-<small>&#8251; Last updated: Aug 29, 2026</small>
 
 [Reverse: 1999]: https://www.prydwen.gg/re1999/guides/introduction-to-the-game
 [Reason for existence]: https://youtu.be/86IxCGKUOzY?si=gccIW8SAXMVXz5Gt

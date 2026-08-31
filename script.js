@@ -48,6 +48,7 @@ async function renderHome (manifest) {
     mainContent.innerHTML = content;
 
     // render sections
+    renderLastUpdated("2026-08-29");
     renderLatest(manifest);
     renderFeatured(manifest);
     renderBadges();
@@ -58,6 +59,60 @@ async function renderHome (manifest) {
     document.querySelector("footer").style.display = "block";
 
     scrollToTop();
+}
+
+function renderLastUpdated(oldDate) {
+    const prefix = "※ Last updated:";
+    let value;
+    let suffix;
+
+    const newSmall = document.createElement("small");
+
+    const timeElapsed = new Date() - new Date(oldDate);
+
+    const minute = 1000 * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+    const week = day * 7;
+    const month = day * 30;
+    const year = day * 365;
+
+    switch (true) {
+        case timeElapsed < minute:
+            newSmall.textContent = `${prefix} Just now`;
+            break;
+        case timeElapsed < hour:
+            value = Math.floor(timeElapsed/minute);
+            suffix = value === 1 ? "minute ago" : "minutes ago";
+            newSmall.textContent = `${prefix} ${value} ${suffix}`;
+            break;
+        case timeElapsed < day:
+            value = Math.floor(timeElapsed/hour);
+            suffix = value === 1 ? "hour ago" : "hours ago";
+            newSmall.textContent = `${prefix} ${value} ${suffix}`;
+            break;
+        case timeElapsed < week:
+            value = Math.floor(timeElapsed/day);
+            suffix = value === 1 ? "day ago" : "days ago";
+            newSmall.textContent = `${prefix} ${value} ${suffix}`;
+            break;
+        case timeElapsed < month:
+            value = Math.floor(timeElapsed/week);
+            suffix = value === 1 ? "week ago" : "weeks ago";
+            newSmall.textContent = `${prefix} ${value} ${suffix}`;
+            break;
+        case timeElapsed < year:
+            value = Math.floor(timeElapsed/month);
+            suffix = value === 1 ? "month ago" : "months ago";
+            newSmall.textContent = `${prefix} ${value} ${suffix}`;
+            break;
+        default:
+            value = Math.floor(timeElapsed/year);
+            suffix = value === 1 ? "year ago" : "years ago";
+            newSmall.textContent = `${prefix} ${value} ${suffix}`;
+    }
+
+    mainContent.append(newSmall);
 }
 
 function renderLatest (manifest) {
