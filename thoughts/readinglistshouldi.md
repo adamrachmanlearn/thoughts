@@ -15,7 +15,3 @@ Anyway, if I ever do actually create it, I think I'll just use platform I alread
 <br>
 
 Yeah anyway, that's it. Good day everyone!
-
-<br>
-
-\*P.S: I ended up create it (lol), you could see it at home page > current section > reading list
