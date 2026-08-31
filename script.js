@@ -77,7 +77,7 @@ function renderLatest (manifest) {
     latestThoughts.forEach(thought => {
         const newLi = document.createElement("li");
         newLi.innerHTML =
-        `<a href="#${thought.slug}">${slugToTitle(thought.slug)}</a>`
+        `<a href="#${thought.slug}">${thought.title}</a>`
         newUl.append(newLi);
     });
 
@@ -100,7 +100,7 @@ function renderFeatured (manifest) {
     featuredThoughts.forEach(thought => {
         const newLi = document.createElement("li");
         newLi.innerHTML =
-        `<a href="#${thought.slug}">${slugToTitle(thought.slug)}</a>`
+        `<a href="#${thought.slug}">${thought.title}</a>`
         newUl.append(newLi);
     });
 
@@ -174,7 +174,7 @@ function renderArchives (manifest) {
         newLi.innerHTML =
         `<div class="list-div">
         ${thought.posted.slice(-2)}
-        <a href="#${thought.slug}">${slugToTitle(thought.slug)}</a>
+        <a href="#${thought.slug}">${thought.title}</a>
         </div>`;
         currentUl.append(newLi);
     });
@@ -193,7 +193,7 @@ async function renderThought (page) {
     const content = await getContent(page.fileName, "thought");
 
     mainContent.innerHTML =
-    `<h2>${slugToTitle(page.slug)}</h2>
+    `<h2>${page.title}</h2>
     <p><small>Posted on ${formatDate(page.posted)}</small></p>
     <br>
     ${content}`;
@@ -231,18 +231,6 @@ function adjustExtLinks (container) {
             link.rel = "noopener noreferrer";
         }
     })
-}
-
-function slugToTitle (string) {
-    /*
-        replace - with space
-        make first char with uppercase
-        make standalone i into I (pronoun)
-    */
-    return string
-        .replace(/-/g, " ")
-        .replace(/^./, char => char.toUpperCase())
-        .replace(/\bi\b/gi, "I");
 }
 
 function formatDate (dateStr) {
