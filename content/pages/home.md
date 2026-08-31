@@ -2,17 +2,14 @@
 
 <br>
 
-This is where I write things that crossed my mind at some point, **that's literally it**. Like any thoughts, not all of them are *good*, some of them could honestly be *very bad*, but I'll use this free will of mine to write them anyway.
+This is where I write things that crossed my mind at some point, **that's literally it**. Like any thoughts, not all of them are facts, most, if not all of them are *very subjective*, but I'll use this free will of mine to write them anyway.
 
-I hope you get whatever you hoped for in here.
-
-#### Current
-
-<small>Last updated: Aug 29, 2026</small>
+#### Currently
 
 Playing: [Reverse: 1999]
 Listening: [Reason for Existence]
 Reading: [List »]
+<small>&#8251; Last updated: Aug 29, 2026</small>
 
 [Reverse: 1999]: https://www.prydwen.gg/re1999/guides/introduction-to-the-game
 [Reason for existence]: https://youtu.be/86IxCGKUOzY?si=gccIW8SAXMVXz5Gt
