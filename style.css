@@ -20,7 +20,7 @@ ul.no-style-list li {
     list-style: none;
 }
 nav a {
-    margin-right: min(2vw, 1rem);
+    margin-right: min(1vw, 8px);
 }
 #main-content img {
     border-radius: .2rem;
