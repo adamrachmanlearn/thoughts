@@ -382,4 +382,7 @@ searchInput.addEventListener("input", () => {
 btnTop.addEventListener("click", () => scrollToTop("smooth"));
 
 window.addEventListener("DOMContentLoaded", init);
-window.addEventListener("hashchange", router);
+window.addEventListener("hashchange", () => {
+    router();
+    searchInput.value = "";
+});
