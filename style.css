@@ -48,6 +48,18 @@ nav a {
     display: flex;
     gap: .4rem;
 }
+.search {
+    display: none;
+    margin-top: 3rem;
+    margin-bottom: 3.8rem;
+}
+.search input {
+    width: 10rem;
+    line-height: 1rem;
+}
+.search-visible {
+    display: block;
+}
 
 /* removes trailing underline on touchscreen */
 /* note: on touchscreen devices, hover = focus */

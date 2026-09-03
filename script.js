@@ -5,6 +5,7 @@ marked.use({
 });
 
 const mainContent = document.getElementById("main-content");
+const searchContent = document.querySelector(".search");
 const btnTop = document.querySelector(".top");
 const thoughtPrefix = "./content/thoughts/";
 const pagePrefix = "./content/pages/";
@@ -199,7 +200,8 @@ function renderArchives (manifest) {
     let currentMonth;
     let currentUl;
 
-    mainContent.innerHTML = "<h2>Archives</h2>";
+    // mainContent.innerHTML = "<h2>Archives</h2>";
+    mainContent.innerHTML = "";
 
     const thoughts = manifest.filter (thought => !thought.metaTag.includes("hidden"));
 
@@ -304,24 +306,33 @@ function scrollToTop (behavior) {
     window.scrollTo({top: 0, behavior: behavior});
 }
 
+function toggleSearch (show) {
+    searchContent.classList.toggle("search-visible", show);
+}
+
 async function router () {
     const manifest = await getManifest();
     const slug = window.location.hash.replace("#", "");
 
     if (!slug) {
+        toggleSearch(false);
         renderHome(manifest);
         return;
     } else if (slug === "about") {
+        toggleSearch(false);
         renderAbout(manifest);
         return;
     } else if (slug === "archives") {
+        toggleSearch(true);
         renderArchives(manifest);
         return;
     } else {
         const page = manifest.find(page => page.slug === slug);
         if (page) {
+            toggleSearch(false);
             renderThought(page);
         } else {
+            toggleSearch(false);
             renderNotFound();
         }
     }
