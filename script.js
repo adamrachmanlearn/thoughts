@@ -6,6 +6,7 @@ marked.use({
 
 const mainContent = document.getElementById("main-content");
 const searchContent = document.querySelector(".search");
+const searchInput = searchContent.firstElementChild;
 const btnTop = document.querySelector(".top");
 const thoughtPrefix = "./content/thoughts/";
 const pagePrefix = "./content/pages/";
@@ -31,6 +32,15 @@ async function getManifest () {
     return await res.json();
 }
 
+// declare manifest globally
+let manifest;
+
+// fetch manifest for global var
+async function init () {
+    manifest = await getManifest();
+    router();
+}
+
 async function getContent (filePath, type) {
     // cond ? true : false
     type === "thought" ?
@@ -42,14 +52,16 @@ async function getContent (filePath, type) {
     return marked.parse(await res.text());
 }
 
-async function renderHome (manifest) {
+async function renderHome () {
     const page = manifest.find(page => page.slug === "home");
     const content = await getContent(page.fileName, "page");
 
     mainContent.innerHTML = content;
 
-    // render sections
+    // change this after updating current section
     renderLastUpdated("2026-08-29");
+
+    // render section
     renderLatest(manifest);
     renderFeatured(manifest);
     renderBadges();
@@ -116,7 +128,7 @@ function renderLastUpdated(oldDate) {
     mainContent.append(newSmall);
 }
 
-function renderLatest (manifest) {
+function renderLatest () {
     // getting latest three
     const latestThoughts = manifest.slice(0, 3);
 
@@ -140,7 +152,7 @@ function renderLatest (manifest) {
     mainContent.append(newSection);
 }
 
-function renderFeatured (manifest) {
+function renderFeatured () {
     const featuredThoughts = manifest.filter(page => page.metaTag.includes("featured"));
 
     const newSection = document.createElement("section");
@@ -179,7 +191,7 @@ function renderBadges () {
     mainContent.append(newSection);
 }
 
-async function renderAbout (manifest) {
+async function renderAbout () {
     const page = manifest.find(page => page.slug === "about");
     const content = await getContent(page.fileName, "page");
     
@@ -200,12 +212,30 @@ function renderArchives (manifest) {
     let currentMonth;
     let currentUl;
 
-    // mainContent.innerHTML = "<h2>Archives</h2>";
     mainContent.innerHTML = "";
 
-    const thoughts = manifest.filter (thought => !thought.metaTag.includes("hidden"));
+    manifest = manifest.filter(thought => !thought.metaTag.includes("hidden"));
 
-    thoughts.forEach(thought => {
+    if (manifest.length === 0) {
+        const newBr = document.createElement("br");
+        const newInfo = document.createElement("ul");
+        newInfo.classList.add("hint", "no-style-list");
+        newInfo.innerHTML = `
+            <li>Try searching by:</li>
+            <li>&emsp; <strong>title</strong>: "the actual reason you do things"</li>
+            <li>&emsp; <strong>date posted</strong>: "july", "2026", "2026-07-25"</li>
+        `;
+        mainContent.append(newBr);
+        mainContent.append(newInfo);
+    } else {
+        const newSmall = document.createElement("small");
+        newSmall.classList.add("hint");
+        newSmall.textContent =
+        `${manifest.length} ${manifest.length > 1 ? "thoughts" : "thought"}`;
+        mainContent.append(newSmall);
+    }
+
+    manifest.forEach(thought => {
         let currentThoughtYear = thought.posted.slice(0, 4);
         let currentThoughtMonth = Number(thought.posted.slice(5, 7));
 
@@ -295,7 +325,7 @@ function formatDate (dateStr) {
     const [year, month, day] = dateStr.split("-");
 
     return `
-    ${fullMonthName[parseInt(month)].slice(0, 3)}
+    ${fullMonthName[parseInt(month)]}
     ${parseInt(day)},
     ${year}
     `
@@ -311,16 +341,15 @@ function toggleSearch (show) {
 }
 
 async function router () {
-    const manifest = await getManifest();
     const slug = window.location.hash.replace("#", "");
 
     if (!slug) {
         toggleSearch(false);
-        renderHome(manifest);
+        renderHome();
         return;
     } else if (slug === "about") {
         toggleSearch(false);
-        renderAbout(manifest);
+        renderAbout();
         return;
     } else if (slug === "archives") {
         toggleSearch(true);
@@ -338,7 +367,19 @@ async function router () {
     }
 }
 
+searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+    const publicManifest = manifest.filter(thought => !thought.metaTag.includes("hidden"));
+    
+    const filteredManifest = publicManifest.filter(thought => 
+        thought.posted.includes(query) ||
+        formatDate(thought.posted).toLowerCase().includes(query) ||
+        thought.title.toLowerCase().includes(query)
+    );
+    renderArchives(filteredManifest);
+});
+
 btnTop.addEventListener("click", () => scrollToTop("smooth"));
 
-window.addEventListener("DOMContentLoaded", router);
+window.addEventListener("DOMContentLoaded", init);
 window.addEventListener("hashchange", router);

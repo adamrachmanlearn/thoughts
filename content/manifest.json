@@ -134,16 +134,23 @@
     },
     {
         "slug": "home",
+        "title": "",
         "metaTag": ["hidden"],
+        "posted": "",
         "fileName": "home.md"
     },
     {
         "slug": "about",
+        "title": "",
         "metaTag": ["hidden"],
+        "posted": "",
         "fileName": "about.md"
     },
     {
         "slug": "archives",
-        "metaTag": ["hidden"]
+        "title": "",
+        "metaTag": ["hidden"],
+        "posted": "",
+        "fileName": ""
     }
 ]

@@ -51,7 +51,6 @@ nav a {
 .search {
     display: none;
     margin-top: 3rem;
-    margin-bottom: 3.8rem;
 }
 .search input {
     width: 10rem;
@@ -59,6 +58,9 @@ nav a {
 }
 .search-visible {
     display: block;
+}
+.hint {
+    opacity: .7;
 }
 
 /* removes trailing underline on touchscreen */
