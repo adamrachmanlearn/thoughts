@@ -22,4 +22,4 @@ With how things feel, I took it upon myself to give, well, myself a *present*, i
 
 <br>
 
-This is very unexpected for me to say, but apparently, at least for today, I enjoyed my time in a code editor lol.
+This is very unexpected for me to say, but at least for today, I enjoyed my time in a code editor lol.
