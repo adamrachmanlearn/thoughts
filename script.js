@@ -4,59 +4,49 @@ marked.use({
     breaks: true
 });
 
-const mainContent = document.getElementById("main-content");
-const searchContent = document.querySelector(".search");
-const searchInput = searchContent.firstElementChild;
+const mainSection = document.getElementById("main-content");
+const footerSection = document.querySelector("footer");
+const searchSection = document.querySelector(".search");
+const searchInput = searchSection.firstElementChild;
 const btnTop = document.querySelector(".top");
-const thoughtPrefix = "./content/thoughts/";
-const pagePrefix = "./content/pages/";
 const fullMonthName = [
-    null,
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
+    null, "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
 ];
-
-async function getManifest () {
-    const res = await fetch("./content/manifest.json");
-    if (!res.ok) throw new Error("Failed fetching manifest");
-    return await res.json();
-}
 
 // declare manifest globally
 let manifest;
 
-// fetch manifest for global var
-async function init () {
-    manifest = await getManifest();
+async function getManifest () {
+    const res = await fetch("./content/manifest.json");
+    if (!res.ok) throw new Error("Failed fetching manifest");
+
+    manifest = await res.json();
     router();
 }
 
-async function getContent (filePath, type) {
+async function getContent (page) {
+    let filePath;
+
     // cond ? true : false
-    type === "thought" ?
-        filePath = `${thoughtPrefix}${filePath}` :
-        filePath = `${pagePrefix}${filePath}`
+    page.isPage === false ?
+        filePath = `./content/thoughts/${page.fileName}` :
+        filePath = `./content/pages/${page.fileName}`
 
     const res = await fetch(filePath);
     if (!res.ok) throw new Error("Failed fetching content");
+
+    // using marked js to parse md files
     return marked.parse(await res.text());
 }
 
 async function renderHome () {
-    const page = manifest.find(page => page.slug === "home");
-    const content = await getContent(page.fileName, "page");
+    const homePage = manifest.find(page => page.slug === "home");
+    const content = await getContent(homePage);
 
-    mainContent.innerHTML = content;
+    mainSection.innerHTML = content;
 
     // change this after updating current section
     renderLastUpdated("2026-08-29");
@@ -66,18 +56,20 @@ async function renderHome () {
     renderFeatured(manifest);
     renderBadges();
 
-    adjustExtLinks(mainContent);
+    adjustExtLinks(mainSection);
 
     // make footer visible AFTER all content loaded
-    document.querySelector("footer").style.display = "block";
+    footerSection.style.display = "block";
 
     scrollToTop();
 }
 
 function renderLastUpdated(oldDate) {
-    const prefix = "※ Last updated:";
-    let value;
-    let suffix;
+    const prefix = "※ Updated -";
+    let mainVal;
+    let secVal;
+    let mainUnit;
+    let secUnit;
 
     const newSmall = document.createElement("small");
 
@@ -90,47 +82,66 @@ function renderLastUpdated(oldDate) {
     const month = day * 30;
     const year = day * 365;
 
+    // allows switch to go straight into each case using true in param
     switch (true) {
         case timeElapsed < minute:
             newSmall.textContent = `${prefix} Just now`;
             break;
         case timeElapsed < hour:
-            value = Math.floor(timeElapsed/minute);
-            suffix = value === 1 ? "minute ago" : "minutes ago";
-            newSmall.textContent = `${prefix} ${value} ${suffix}`;
+            mainVal = Math.floor(timeElapsed / minute);
+            mainUnit = "m ago";
+            newSmall.textContent = `${prefix} ${mainVal}${mainUnit}`;
             break;
         case timeElapsed < day:
-            value = Math.floor(timeElapsed/hour);
-            suffix = value === 1 ? "hour ago" : "hours ago";
-            newSmall.textContent = `${prefix} ${value} ${suffix}`;
+            mainVal = Math.floor(timeElapsed / hour);
+            // using remainder/modulo (%) to get the remaining milliseconds value
+            // after its done filling as much [hour] as possible,
+            // then throw it to get as much [minute] as possible
+            secVal = Math.floor((timeElapsed % hour) / minute);
+            mainUnit = "h";
+            secUnit = "m ago";
+            newSmall.textContent =
+            `${prefix} ${mainVal}${mainUnit} ${secVal}${secUnit}`;
             break;
         case timeElapsed < week:
-            value = Math.floor(timeElapsed/day);
-            suffix = value === 1 ? "day ago" : "days ago";
-            newSmall.textContent = `${prefix} ${value} ${suffix}`;
+            mainVal = Math.floor(timeElapsed / day);
+            secVal = Math.floor((timeElapsed % day) / hour);
+            mainUnit = "d";
+            secUnit = "h ago";
+            newSmall.textContent =
+            `${prefix} ${mainVal}${mainUnit} ${secVal}${secUnit}`;
             break;
         case timeElapsed < month:
-            value = Math.floor(timeElapsed/week);
-            suffix = value === 1 ? "week ago" : "weeks ago";
-            newSmall.textContent = `${prefix} ${value} ${suffix}`;
+            mainVal = Math.floor(timeElapsed / week);
+            secVal = Math.floor((timeElapsed % week) / day);
+            mainUnit = "wk";
+            secUnit = "d ago";
+            newSmall.textContent =
+            `${prefix} ${mainVal}${mainUnit} ${secVal}${secUnit}`;
             break;
         case timeElapsed < year:
-            value = Math.floor(timeElapsed/month);
-            suffix = value === 1 ? "month ago" : "months ago";
-            newSmall.textContent = `${prefix} ${value} ${suffix}`;
+            mainVal = Math.floor(timeElapsed / month);
+            secVal = Math.floor((timeElapsed % month) / week);
+            mainUnit = "mo";
+            secUnit = "wk ago";
+            newSmall.textContent =
+            `${prefix} ${mainVal}${mainUnit} ${secVal}${secUnit}`;
             break;
         default:
-            value = Math.floor(timeElapsed/year);
-            suffix = value === 1 ? "year ago" : "years ago";
-            newSmall.textContent = `${prefix} ${value} ${suffix}`;
+            mainVal = Math.floor(timeElapsed / year);
+            secVal = Math.floor((timeElapsed % year) / month);
+            mainUnit = "yr";
+            secUnit = "mo ago";
+            newSmall.textContent =
+            `${prefix} ${mainVal}${mainUnit} ${secVal}${secUnit}`;
     }
 
-    mainContent.append(newSmall);
+    mainSection.append(newSmall);
 }
 
 function renderLatest () {
-    // getting latest three
-    const latestThoughts = manifest.slice(0, 3);
+    const pages = manifest.filter(page => page.isPage === false);
+    const latestPages = pages.slice(0, 3);
 
     const newSection = document.createElement("section");
     const newHeader = document.createElement("h4");
@@ -142,18 +153,20 @@ function renderLatest () {
     newSection.append(newHeader);
     newSection.append(newUl);
 
-    latestThoughts.forEach(thought => {
+    latestPages.forEach(page => {
         const newLi = document.createElement("li");
+
         newLi.innerHTML =
-        `<a href="#${thought.slug}">${thought.title}</a>`
+        `<a href="#${page.slug}">${page.title}</a>`
         newUl.append(newLi);
     });
 
-    mainContent.append(newSection);
+    mainSection.append(newSection);
 }
 
 function renderFeatured () {
-    const featuredThoughts = manifest.filter(page => page.metaTag.includes("featured"));
+    const pages = manifest.filter(page => page.isPage === false);
+    const featPages = pages.filter(page => page.tags.includes("feat"));
 
     const newSection = document.createElement("section");
     const newHeader = document.createElement("h4");
@@ -165,14 +178,14 @@ function renderFeatured () {
     newSection.append(newHeader);
     newSection.append(newUl);
 
-    featuredThoughts.forEach(thought => {
+    featPages.forEach(page => {
         const newLi = document.createElement("li");
         newLi.innerHTML =
-        `<a href="#${thought.slug}">${thought.title}</a>`
+        `<a href="#${page.slug}">${page.title}</a>`
         newUl.append(newLi);
     });
 
-    mainContent.append(newSection);
+    mainSection.append(newSection);
 }
 
 function renderBadges () {
@@ -188,35 +201,36 @@ function renderBadges () {
         <img src="./assets/badges/anime-blink.gif" alt="Anime blinking badge" />
         `;
 
-    mainContent.append(newSection);
+    mainSection.append(newSection);
 }
 
 async function renderAbout () {
     const page = manifest.find(page => page.slug === "about");
-    const content = await getContent(page.fileName, "page");
+    const content = await getContent(page);
     
-    mainContent.innerHTML = content;
+    mainSection.innerHTML = content;
 
     renderBadges();
 
-    adjustExtLinks(mainContent);
+    adjustExtLinks(mainSection);
 
     // make footer visible AFTER all content loaded
-    document.querySelector("footer").style.display = "block";
+    footerSection.style.display = "block";
 
     scrollToTop();
 }
 
 function renderArchives (manifest) {
+    const pages = manifest.filter(thought => thought.isPage === false);
+    
     let currentYear;
     let currentMonth;
     let currentUl;
 
-    mainContent.innerHTML = "";
+    // reset main section before rendering new list
+    mainSection.innerHTML = "";
 
-    manifest = manifest.filter(thought => !thought.metaTag.includes("hidden"));
-
-    if (manifest.length === 0) {
+    if (pages.length === 0) {
         const newBr = document.createElement("br");
         const newInfo = document.createElement("ul");
         newInfo.classList.add("hint", "no-style-list");
@@ -225,61 +239,83 @@ function renderArchives (manifest) {
             <li>&emsp; <strong>title</strong>: "the actual reason you do things"</li>
             <li>&emsp; <strong>date posted</strong>: "july", "2026", "2026-07-25"</li>
         `;
-        mainContent.append(newBr);
-        mainContent.append(newInfo);
+        mainSection.append(newBr);
+        mainSection.append(newInfo);
     } else {
         const newSmall = document.createElement("small");
         newSmall.classList.add("hint");
         newSmall.textContent =
-        `${manifest.length} ${manifest.length > 1 ? "thoughts" : "thought"}`;
-        mainContent.append(newSmall);
+        `${pages.length} ${pages.length > 1 ? "thoughts" : "thought"} written`;
+        mainSection.append(newSmall);
     }
 
-    manifest.forEach(thought => {
-        let currentThoughtYear = thought.posted.slice(0, 4);
-        let currentThoughtMonth = Number(thought.posted.slice(5, 7));
+    pages.forEach(page => {
+        let currentThoughtYear = page.posted.slice(0, 4);
+        let currentThoughtMonth = Number(page.posted.slice(5, 7));
 
         if (currentYear !== currentThoughtYear) {
             currentYear = currentThoughtYear;
+
             // resetting month if year changed
             currentMonth = null;
         }
 
         if (currentMonth !== currentThoughtMonth) {
             currentMonth = currentThoughtMonth;
+
             const newHeader = document.createElement("h4");
             newHeader.textContent = `${fullMonthName[currentMonth]}, ${currentYear}`;
-            mainContent.append(newHeader);
+            mainSection.append(newHeader);
 
             // create ul for this month
             currentUl = document.createElement("ul");
             currentUl.classList.add("no-style-list");
-            mainContent.append(currentUl);
+
+            mainSection.append(currentUl);
         }
 
         const newLi = document.createElement("li");
         newLi.innerHTML =
         `<div class="list-div">
-        ${thought.posted.slice(-2)}
-        <a href="#${thought.slug}">${thought.title}</a>
+        ${page.posted.slice(-2)}
+        <a href="#${page.slug}">${page.title}</a>
         </div>`;
+
         currentUl.append(newLi);
     });
 
     renderBadges();
 
-    adjustExtLinks(mainContent);
+    adjustExtLinks(mainSection);
 
     // make footer visible AFTER all content loaded
-    document.querySelector("footer").style.display = "block";
+    footerSection.style.display = "block";
 
     scrollToTop();
 }
 
-async function renderThought (page) {
-    const content = await getContent(page.fileName, "thought");
+// search box event listener
+searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+    
+    const filteredPages = manifest.filter(page =>
+        // search by date with ISO 8601 format (YYYY-MM-DD)
+        page.posted.includes(query) ||
 
-    mainContent.innerHTML =
+        // search by date with month date, year format
+        formatDate(page.posted).toLowerCase().includes(query) ||
+
+        //  search by title
+        page.title.toLowerCase().includes(query)
+    );
+
+    renderArchives(filteredPages);
+});
+
+async function renderThought (page) {
+    const content = await getContent(page);
+
+    mainSection.innerHTML =
     `<h2>${page.title}</h2>
     <p><small>Posted on ${formatDate(page.posted)}</small></p>
     <br>
@@ -287,60 +323,60 @@ async function renderThought (page) {
 
     renderBadges();
 
-    adjustExtLinks(mainContent);
+    adjustExtLinks(mainSection);
 
     // make footer visible AFTER all content loaded
-    document.querySelector("footer").style.display = "block";
+    footerSection.style.display = "block";
 
     scrollToTop();
 }
 
 function renderNotFound () {
-    mainContent.innerHTML = 
+    mainSection.innerHTML = 
     `<h2>Not found</h2>
     <br>
     <p>Page you're looking for isn't created.. at least <em>yet</em>.</p>`;
 
     renderBadges();
 
-    adjustExtLinks(mainContent);
+    adjustExtLinks(mainSection);
 
     // make footer visible AFTER all content loaded
-    document.querySelector("footer").style.display = "block";
+    footerSection.style.display = "block";
 
     scrollToTop();
 }
 
 function adjustExtLinks (container) {
     container.querySelectorAll("a").forEach(link => {
-        if (link.getAttribute("href").startsWith("http")) {
+        if(link.getAttribute("href").startsWith("http")) {
             link.target = "_blank";
             link.rel = "noopener noreferrer";
         }
-    })
+    });
 }
 
-function formatDate (dateStr) {
+function formatDate(dateStr) {
     // getting individual var from "2000-01-01" format
     const [year, month, day] = dateStr.split("-");
 
-    return `
-    ${fullMonthName[parseInt(month)]}
-    ${parseInt(day)},
-    ${year}
-    `
+    return(
+        `${fullMonthName[parseInt(month)]}
+        ${parseInt(day)},
+        ${year}`
+    );
 }
 
-function scrollToTop (behavior) {
-    if (behavior === undefined) behavior = "instant";
+function scrollToTop(behavior) {
+    if(behavior === undefined) behavior = "instant";
     window.scrollTo({top: 0, behavior: behavior});
 }
 
-function toggleSearch (show) {
-    searchContent.classList.toggle("search-visible", show);
+function toggleSearch(show) {
+    searchSection.classList.toggle("search-visible", show);
 }
 
-async function router () {
+async function router() {
     const slug = window.location.hash.replace("#", "");
 
     if (!slug) {
@@ -367,22 +403,10 @@ async function router () {
     }
 }
 
-searchInput.addEventListener("input", () => {
-    const query = searchInput.value.trim().toLowerCase();
-    const publicManifest = manifest.filter(thought => !thought.metaTag.includes("hidden"));
-    
-    const filteredManifest = publicManifest.filter(thought => 
-        thought.posted.includes(query) ||
-        formatDate(thought.posted).toLowerCase().includes(query) ||
-        thought.title.toLowerCase().includes(query)
-    );
-    renderArchives(filteredManifest);
-});
-
 btnTop.addEventListener("click", () => scrollToTop("smooth"));
 
-window.addEventListener("DOMContentLoaded", init);
+window.addEventListener("DOMContentLoaded", getManifest);
 window.addEventListener("hashchange", () => {
-    router();
     searchInput.value = "";
+    router();
 });

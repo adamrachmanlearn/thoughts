@@ -2,162 +2,185 @@
     {
         "slug": "slow-down-physically",
         "title": "Slow down, physically",
-        "metaTag": [],
+        "fileName": "slowdownphysically.md",
         "posted": "2026-09-03",
-        "fileName": "slowdownphysically.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "people-dont-care",
         "title": "People don't care",
-        "metaTag": [],
+        "fileName": "peopledontcare.md",
         "posted": "2026-08-31",
-        "fileName": "peopledontcare.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "you-are-not-a-seer",
         "title": "You are NOT a Seer",
-        "metaTag": [],
+        "fileName": "youarenotaseer.md",
         "posted": "2026-08-30",
-        "fileName": "youarenotaseer.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "reading-list-should-i",
         "title": "Reading list, should I?",
-        "metaTag": [],
+        "fileName": "readinglistshouldi.md",
         "posted": "2026-08-29",
-        "fileName": "readinglistshouldi.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "fascinated-by-boxing",
         "title": "Fascinated by Boxing",
-        "metaTag": [],
+        "fileName": "fascinatedbyboxing.md",
         "posted": "2026-08-27",
-        "fileName": "fascinatedbyboxing.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "slow-progress",
         "title": "Slow progress",
-        "metaTag": [],
+        "fileName": "slowprogress.md",
         "posted": "2026-08-25",
-        "fileName": "slowprogress.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "end-of-a-life",
         "title": "End of a life",
-        "metaTag": [],
+        "fileName": "endofalife.md",
         "posted": "2026-08-20",
-        "fileName": "endofalife.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "my-sincere-apology",
         "title": "My sincere apology",
-        "metaTag": [],
+        "fileName": "mysincereapology.md",
         "posted": "2026-08-17",
-        "fileName": "mysincereapology.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "respect-the-distance",
         "title": "Respect the distance",
-        "metaTag": [],
+        "fileName": "respectthedistance.md",
         "posted": "2026-08-15",
-        "fileName": "respectthedistance.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "weary-of-life",
         "title": "Weary of life",
-        "metaTag": [],
+        "fileName": "wearyoflife.md",
         "posted": "2026-08-14",
-        "fileName": "wearyoflife.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "silly-ways-to-stay-on-top-of-exercise",
         "title": "Silly ways to stay on top of exercise",
-        "metaTag": [],
+        "fileName": "sillywaystostayontopofexercise.md",
         "posted": "2026-08-09",
-        "fileName": "sillywaystostayontopofexercise.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "i-was-searching-for-perfection-found-enlightenment-instead",
         "title": "I was searching for perfection, found enlightenment instead",
-        "metaTag": [],
+        "fileName": "iwassearchingforperfectionfoundenlightenmentinstead.md",
         "posted": "2026-08-07",
-        "fileName": "iwassearchingforperfectionfoundenlightenmentinstead.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "gacha-games-unironically-taught-me-to-be-frugal",
         "title": "Gacha games unironically taught me to be frugal",
-        "metaTag": [],
+        "fileName": "gachagamesunironicallytaughtmetobefrugal.md",
         "posted": "2026-08-02",
-        "fileName": "gachagamesunironicallytaughtmetobefrugal.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "expanded-horizon",
         "title": "Expanded horizon",
-        "metaTag": [],
+        "fileName": "expandedhorizon.md",
         "posted": "2026-08-01",
-        "fileName": "expandedhorizon.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "how-stepping-back-from-things-helped-me",
         "title": "How stepping back from things helped me",
-        "metaTag": [],
+        "fileName": "howsteppingbackfromthingshelpedme.md",
         "posted": "2026-07-31",
-        "fileName": "howsteppingbackfromthingshelpedme.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "doing-life-one-day-at-a-time",
         "title": "Doing life one day at a time",
-        "metaTag": ["featured"],
+        "fileName": "doinglifeonedayatatime.md",
         "posted": "2026-07-29",
-        "fileName": "doinglifeonedayatatime.md"
+        "tags": ["feat"],
+        "isPage": false
     },
     {
         "slug": "why-my-best-runs-are-often-the-slowest",
         "title": "Why my best runs are often the slowest",
-        "metaTag": [],
+        "fileName": "whymybestrunsareoftentheslowest.md",
         "posted": "2026-07-28",
-        "fileName": "whymybestrunsareoftentheslowest.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "work-in-iterations",
         "title": "Work in iterations",
-        "metaTag": ["featured"],
+        "fileName": "workiniterations.md",
         "posted": "2026-07-27",
-        "fileName": "workiniterations.md"
+        "tags": ["feat"],
+        "isPage": false
     },
     {
         "slug": "why-i-love-calisthenics",
         "title": "Why I love calisthenics",
-        "metaTag": [],
+        "fileName": "whyilovecalisthenics.md",
         "posted": "2026-07-26",
-        "fileName": "whyilovecalisthenics.md"
+        "tags": [],
+        "isPage": false
     },
     {
         "slug": "the-actual-reason-you-do-things",
         "title": "The actual reason you do things",
-        "metaTag": ["featured"],
+        "fileName": "theactualreasonyoudothings.md",
         "posted": "2026-07-25",
-        "fileName": "theactualreasonyoudothings.md"
+        "tags": ["feat"],
+        "isPage": false
     },
     {
         "slug": "home",
         "title": "",
-        "metaTag": ["hidden"],
+        "fileName": "home.md",
         "posted": "",
-        "fileName": "home.md"
+        "tags": [],
+        "isPage": true
     },
     {
         "slug": "about",
         "title": "",
-        "metaTag": ["hidden"],
+        "fileName": "about.md",
         "posted": "",
-        "fileName": "about.md"
+        "tags": [],
+        "isPage": true
     },
     {
         "slug": "archives",
         "title": "",
-        "metaTag": ["hidden"],
+        "fileName": "",
         "posted": "",
-        "fileName": ""
+        "tags": [],
+        "isPage": true
     }
 ]
