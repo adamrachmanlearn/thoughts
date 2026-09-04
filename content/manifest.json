@@ -1,5 +1,13 @@
 [
     {
+        "slug": "happy-birthday-me",
+        "title": "Happy birthday, me",
+        "fileName": "happybirthdayme.md",
+        "posted": "2026-09-04",
+        "tags": [],
+        "isPage": false
+    },
+    {
         "slug": "slow-down-physically",
         "title": "Slow down, physically",
         "fileName": "slowdownphysically.md",
