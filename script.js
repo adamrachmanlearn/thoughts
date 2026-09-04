@@ -5,44 +5,35 @@ marked.use({
 });
 
 const mainSection = document.getElementById("main-content");
-const footerSection = document.querySelector("footer");
 const searchSection = document.querySelector(".search");
 const searchInput = searchSection.firstElementChild;
-const btnTop = document.querySelector(".top");
-const fullMonthName = [
-    null, "January", "February", "March",
-    "April", "May", "June", "July",
-    "August", "September", "October",
-    "November", "December"
-];
+const buttonTop = document.querySelector(".top");
+const footerSection = document.querySelector("footer");
 
 // declare manifest globally
 let manifest;
 
-async function getManifest () {
+async function getManifest() {
     const res = await fetch("./content/manifest.json");
-    if (!res.ok) throw new Error("Failed fetching manifest");
+    if(!res.ok) throw new Error("Failed fetching manifest");
 
     manifest = await res.json();
     router();
 }
 
-async function getContent (page) {
-    let filePath;
-
-    // cond ? true : false
-    page.isPage === false ?
-        filePath = `./content/thoughts/${page.fileName}` :
-        filePath = `./content/pages/${page.fileName}`
+async function getContent(page) {
+    const filePath = page.isPage === false ?
+        `./content/thoughts/${page.fileName}` :
+        `./content/pages/${page.fileName}`
 
     const res = await fetch(filePath);
-    if (!res.ok) throw new Error("Failed fetching content");
+    if(!res.ok) throw new Error("Failed fetching content");
 
     // using marked js to parse md files
     return marked.parse(await res.text());
 }
 
-async function renderHome () {
+async function renderHome() {
     const homePage = manifest.find(page => page.slug === "home");
     const content = await getContent(homePage);
 
@@ -51,30 +42,120 @@ async function renderHome () {
     // change this after updating current section
     renderLastUpdated("2026-08-29");
 
-    // render section
     renderLatest(manifest);
     renderFeatured(manifest);
-    renderBadges();
 
-    adjustExtLinks(mainSection);
+    defaultBehavior();
+}
 
-    // make footer visible AFTER all content loaded
-    footerSection.style.display = "block";
+async function renderPage(slug) {
+    if(slug === "archives") {
+        toggleSearch(true);
+        renderArchives(manifest);
+        return;
+    }
 
-    scrollToTop();
+    const page = manifest.find(page => page.slug === slug);
+    const content = await getContent(page);
+
+    // format mainSection
+    mainSection.innerHTML = content;
+
+    if(page.isPage === false) {
+        const newHeader = document.createElement("h2");
+        const newPosted = document.createElement("p");
+        const newSpace = document.createElement("br");
+
+        newHeader.innerText = page.title;
+        newPosted.innerHTML =
+        `<small>Posted on ${formatDate(page.posted)}</small>`;
+        mainSection.prepend(newHeader, newPosted, newSpace);
+    }
+
+    defaultBehavior(slug);
+}
+
+function renderArchives(manifest) {
+    const pages = manifest.filter(thought => thought.isPage === false);
+    
+    let currentYear, currentMonth, currentUl;
+
+    // reset main section before rendering new list
+    mainSection.innerHTML = "";
+
+    if(pages.length === 0) {
+        const newSpace = document.createElement("br");
+        const newInfo = document.createElement("ul");
+        newInfo.classList.add("hint", "no-style-list");
+        newInfo.innerHTML = 
+            `<li>Try searching by:</li>
+            <li>&emsp; <strong>title</strong>: "the actual reason you do things"</li>
+            <li>&emsp; <strong>date posted</strong>: "july", "2026", "2026-07-25"</li>`;
+        mainSection.append(newSpace);
+        mainSection.append(newInfo);
+    } else {
+        const newSmall = document.createElement("small");
+        newSmall.classList.add("hint");
+        newSmall.textContent =
+        `${pages.length} ${pages.length > 1 ? "thoughts" : "thought"} written`;
+        mainSection.append(newSmall);
+    }
+
+    pages.forEach(page => {
+        const datePosted = formatDate(page.posted);
+        let currentThoughtYear = datePosted.slice(-4);
+        let currentThoughtMonth = datePosted.slice(0, 3);
+
+        if (currentYear !== currentThoughtYear) {
+            currentYear = currentThoughtYear;
+
+            // resetting month if year changed
+            currentMonth = null;
+        }
+
+        if (currentMonth !== currentThoughtMonth) {
+            currentMonth = currentThoughtMonth;
+
+            const newHeader = document.createElement("h4");
+            newHeader.textContent = `${datePosted.split(" ")[0]}, ${currentYear}`;
+            mainSection.append(newHeader);
+
+            // create ul for this month
+            currentUl = document.createElement("ul");
+            currentUl.classList.add("no-style-list");
+
+            mainSection.append(currentUl);
+        }
+
+        const newLi = document.createElement("li");
+        newLi.innerHTML =
+        `<div class="list-div">
+        ${page.posted.slice(-2)}
+        <a href="#${page.slug}">${page.title}</a>
+        </div>`;
+
+        currentUl.append(newLi);
+    });
+
+    defaultBehavior("archives");
+}
+
+function renderNotFound() {
+    mainSection.innerHTML = 
+    `<h2>Not found</h2>
+    <br>
+    <p>Page you're looking for isn't created.. at least <em>yet</em>.</p>`;
+
+    defaultBehavior();
 }
 
 function renderLastUpdated(oldDate) {
     const prefix = "※ Updated -";
-    let mainVal;
-    let secVal;
-    let mainUnit;
-    let secUnit;
+    let mainVal, secVal, mainUnit, secUnit;
 
     const newSmall = document.createElement("small");
 
     const timeElapsed = new Date() - new Date(oldDate);
-
     const minute = 1000 * 60;
     const hour = minute * 60;
     const day = hour * 24;
@@ -83,7 +164,7 @@ function renderLastUpdated(oldDate) {
     const year = day * 365;
 
     // allows switch to go straight into each case using true in param
-    switch (true) {
+    switch(true) {
         case timeElapsed < minute:
             newSmall.textContent = `${prefix} Just now`;
             break;
@@ -139,7 +220,7 @@ function renderLastUpdated(oldDate) {
     mainSection.append(newSmall);
 }
 
-function renderLatest () {
+function renderLatest() {
     const pages = manifest.filter(page => page.isPage === false);
     const latestPages = pages.slice(0, 3);
 
@@ -158,13 +239,14 @@ function renderLatest () {
 
         newLi.innerHTML =
         `<a href="#${page.slug}">${page.title}</a>`
+
         newUl.append(newLi);
     });
 
     mainSection.append(newSection);
 }
 
-function renderFeatured () {
+function renderFeatured() {
     const pages = manifest.filter(page => page.isPage === false);
     const featPages = pages.filter(page => page.tags.includes("feat"));
 
@@ -180,129 +262,94 @@ function renderFeatured () {
 
     featPages.forEach(page => {
         const newLi = document.createElement("li");
+
         newLi.innerHTML =
         `<a href="#${page.slug}">${page.title}</a>`
+
         newUl.append(newLi);
     });
 
     mainSection.append(newSection);
 }
 
-function renderBadges () {
+function renderBadges() {
     const newSection = document.createElement("section");
     newSection.classList.add("badge-container");
     newSection.innerHTML =
-        `
-        <img class="big-badge" src="./assets/badges/by-human.svg" alt="Made by human badge" />
+        `<img class="big-badge" src="./assets/badges/by-human.svg" alt="Made by human badge" />
         <img src="./assets/badges/github-pages.svg" alt="GitHub pages badge" />
         <img src="./assets/badges/html.svg" alt="HTML badge" />
         <img src="./assets/badges/css.svg" alt="CSS badge" />
         <img src="./assets/badges/js.svg" alt="JavaScript badge" />
-        <img src="./assets/badges/anime-blink.gif" alt="Anime blinking badge" />
-        `;
+        <img src="./assets/badges/anime-blink.gif" alt="Anime blinking badge" />`;
 
     mainSection.append(newSection);
 }
 
-async function renderAbout () {
-    const page = manifest.find(page => page.slug === "about");
-    const content = await getContent(page);
-    
-    mainSection.innerHTML = content;
-
-    renderBadges();
-
-    adjustExtLinks(mainSection);
-
-    // make footer visible AFTER all content loaded
-    footerSection.style.display = "block";
-
-    scrollToTop();
+function formatDate(string) {
+    return new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    }).format(new Date(string));
 }
 
-function renderArchives (manifest) {
-    const pages = manifest.filter(thought => thought.isPage === false);
-    
-    let currentYear;
-    let currentMonth;
-    let currentUl;
-
-    // reset main section before rendering new list
-    mainSection.innerHTML = "";
-
-    if (pages.length === 0) {
-        const newBr = document.createElement("br");
-        const newInfo = document.createElement("ul");
-        newInfo.classList.add("hint", "no-style-list");
-        newInfo.innerHTML = `
-            <li>Try searching by:</li>
-            <li>&emsp; <strong>title</strong>: "the actual reason you do things"</li>
-            <li>&emsp; <strong>date posted</strong>: "july", "2026", "2026-07-25"</li>
-        `;
-        mainSection.append(newBr);
-        mainSection.append(newInfo);
-    } else {
-        const newSmall = document.createElement("small");
-        newSmall.classList.add("hint");
-        newSmall.textContent =
-        `${pages.length} ${pages.length > 1 ? "thoughts" : "thought"} written`;
-        mainSection.append(newSmall);
-    }
-
-    pages.forEach(page => {
-        let currentThoughtYear = page.posted.slice(0, 4);
-        let currentThoughtMonth = Number(page.posted.slice(5, 7));
-
-        if (currentYear !== currentThoughtYear) {
-            currentYear = currentThoughtYear;
-
-            // resetting month if year changed
-            currentMonth = null;
+function adjustExtLinks(section) {
+    section.querySelectorAll("a").forEach(link => {
+        if(link.getAttribute("href").startsWith("http")) {
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
         }
-
-        if (currentMonth !== currentThoughtMonth) {
-            currentMonth = currentThoughtMonth;
-
-            const newHeader = document.createElement("h4");
-            newHeader.textContent = `${fullMonthName[currentMonth]}, ${currentYear}`;
-            mainSection.append(newHeader);
-
-            // create ul for this month
-            currentUl = document.createElement("ul");
-            currentUl.classList.add("no-style-list");
-
-            mainSection.append(currentUl);
-        }
-
-        const newLi = document.createElement("li");
-        newLi.innerHTML =
-        `<div class="list-div">
-        ${page.posted.slice(-2)}
-        <a href="#${page.slug}">${page.title}</a>
-        </div>`;
-
-        currentUl.append(newLi);
     });
+}
+
+function toggleSearch(show) {
+    searchSection.classList.toggle("search-visible", show);
+}
+
+function scrollToTop(behavior) {
+    if(behavior === undefined) behavior = "instant";
+    window.scrollTo({top: 0, behavior: behavior});
+}
+
+function defaultBehavior(slug) {
+    slug !== "archives" ? toggleSearch(false) : toggleSearch(true);
 
     renderBadges();
-
     adjustExtLinks(mainSection);
-
-    // make footer visible AFTER all content loaded
     footerSection.style.display = "block";
-
     scrollToTop();
 }
 
-// search box event listener
+async function router() {
+    const slug = window.location.hash.replace("#", "");
+
+    // arr.some() will return true if even one page found
+    const pageFound = manifest.some(page => page.slug === slug);
+
+    switch(true) {
+        case slug === "":
+            renderHome();
+            break;
+        case pageFound:
+            renderPage(slug);
+            break;
+        default:
+            renderNotFound();
+    }
+}
+
+// event listeners
+buttonTop.addEventListener("click", () => scrollToTop("smooth"));
 searchInput.addEventListener("input", () => {
     const query = searchInput.value.trim().toLowerCase();
+    const pages = manifest.filter(page => page.isPage === false);
     
-    const filteredPages = manifest.filter(page =>
-        // search by date with ISO 8601 format (YYYY-MM-DD)
+    const filteredPages = pages.filter(page =>
+        // search by date (2000-01-01)
         page.posted.includes(query) ||
 
-        // search by date with month date, year format
+        // search by date (january 1, 2000)
         formatDate(page.posted).toLowerCase().includes(query) ||
 
         //  search by title
@@ -312,101 +359,9 @@ searchInput.addEventListener("input", () => {
     renderArchives(filteredPages);
 });
 
-async function renderThought (page) {
-    const content = await getContent(page);
-
-    mainSection.innerHTML =
-    `<h2>${page.title}</h2>
-    <p><small>Posted on ${formatDate(page.posted)}</small></p>
-    <br>
-    ${content}`;
-
-    renderBadges();
-
-    adjustExtLinks(mainSection);
-
-    // make footer visible AFTER all content loaded
-    footerSection.style.display = "block";
-
-    scrollToTop();
-}
-
-function renderNotFound () {
-    mainSection.innerHTML = 
-    `<h2>Not found</h2>
-    <br>
-    <p>Page you're looking for isn't created.. at least <em>yet</em>.</p>`;
-
-    renderBadges();
-
-    adjustExtLinks(mainSection);
-
-    // make footer visible AFTER all content loaded
-    footerSection.style.display = "block";
-
-    scrollToTop();
-}
-
-function adjustExtLinks (container) {
-    container.querySelectorAll("a").forEach(link => {
-        if(link.getAttribute("href").startsWith("http")) {
-            link.target = "_blank";
-            link.rel = "noopener noreferrer";
-        }
-    });
-}
-
-function formatDate(dateStr) {
-    // getting individual var from "2000-01-01" format
-    const [year, month, day] = dateStr.split("-");
-
-    return(
-        `${fullMonthName[parseInt(month)]}
-        ${parseInt(day)},
-        ${year}`
-    );
-}
-
-function scrollToTop(behavior) {
-    if(behavior === undefined) behavior = "instant";
-    window.scrollTo({top: 0, behavior: behavior});
-}
-
-function toggleSearch(show) {
-    searchSection.classList.toggle("search-visible", show);
-}
-
-async function router() {
-    const slug = window.location.hash.replace("#", "");
-
-    if (!slug) {
-        toggleSearch(false);
-        renderHome();
-        return;
-    } else if (slug === "about") {
-        toggleSearch(false);
-        renderAbout();
-        return;
-    } else if (slug === "archives") {
-        toggleSearch(true);
-        renderArchives(manifest);
-        return;
-    } else {
-        const page = manifest.find(page => page.slug === slug);
-        if (page) {
-            toggleSearch(false);
-            renderThought(page);
-        } else {
-            toggleSearch(false);
-            renderNotFound();
-        }
-    }
-}
-
-btnTop.addEventListener("click", () => scrollToTop("smooth"));
-
 window.addEventListener("DOMContentLoaded", getManifest);
 window.addEventListener("hashchange", () => {
+    // resetting search box
     searchInput.value = "";
     router();
 });
