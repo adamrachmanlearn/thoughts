@@ -46,7 +46,7 @@ async function renderHome() {
     renderLastUpdated(`${updateDate}T${updateTime}`);
 
     renderLatest(manifest);
-    renderFeatured(manifest);
+    // renderFeatured(manifest);
 
     defaultBehavior();
 }
@@ -212,7 +212,7 @@ function renderLastUpdated(oldDate) {
 
 function renderLatest() {
     const pages = manifest.filter(page => page.isPage === false);
-    const latestPages = pages.slice(0, 3);
+    const latestPages = pages.slice(0, 5);
 
     const newSection = document.createElement("section");
     const newHeader = document.createElement("h4");
