@@ -152,7 +152,7 @@ function renderNotFound() {
 }
 
 function renderLastUpdated(oldDate) {
-    const prefix = "※ Updated -";
+    const prefix = "Updated";
     let mainVal, secVal, mainUnit, secUnit;
 
     const newSmall = document.createElement("small");
@@ -167,36 +167,18 @@ function renderLastUpdated(oldDate) {
 
     // allows switch to go straight into each case using true in param
     switch(true) {
-        case timeElapsed < minute:
-            newSmall.textContent = `${prefix} Just now`;
-            break;
-        case timeElapsed < hour:
-            mainVal = Math.floor(timeElapsed / minute);
-            mainUnit = "m ago";
-            newSmall.textContent = `${prefix} ${mainVal}${mainUnit}`;
-            break;
         case timeElapsed < day:
-            mainVal = Math.floor(timeElapsed / hour);
-            // using remainder/modulo (%) to get the remaining milliseconds value
-            // after its done filling as much [hour] as possible,
-            // then throw it to get as much [minute] as possible
-            secVal = Math.floor((timeElapsed % hour) / minute);
-            mainUnit = "h";
-            secUnit = "m ago";
-            newSmall.textContent =
-            `${prefix} ${mainVal}${mainUnit}` +
-            (secVal > 0 ? ` ${secVal}${secUnit}` : " ago");
+            newSmall.textContent = `${prefix} today`
             break;
         case timeElapsed < week:
             mainVal = Math.floor(timeElapsed / day);
-            secVal = Math.floor((timeElapsed % day) / hour);
-            mainUnit = "d";
-            secUnit = "h ago";
-            newSmall.textContent =
-            `${prefix} ${mainVal}${mainUnit}` +
-            (secVal > 0 ? ` ${secVal}${secUnit}` : " ago");
+            mainUnit = "d ago";
+            newSmall.textContent = `${prefix} ${mainVal}${mainUnit}`
             break;
         case timeElapsed < month:
+            // using remainder/modulo (%) to get the remaining milliseconds value
+            // after its done filling as much [hour] as possible,
+            // then throw it to get as much [minute] as possible
             mainVal = Math.floor(timeElapsed / week);
             secVal = Math.floor((timeElapsed % week) / day);
             mainUnit = "w";
