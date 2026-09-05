@@ -42,6 +42,7 @@ async function renderHome() {
     // change this after updating current section
     const updateDate = "2026-08-29";
     const updateTime = "15:15";
+
     renderLastUpdated(`${updateDate}T${updateTime}`);
 
     renderLatest(manifest);
@@ -172,8 +173,8 @@ function renderLastUpdated(oldDate) {
             break;
         case timeElapsed < week:
             mainVal = Math.floor(timeElapsed / day);
-            mainUnit = "d ago";
-            newSmall.textContent = `${prefix} ${mainVal}${mainUnit}`
+            mainUnit = (mainVal > 1 ? "days" : "day") + " ago";
+            newSmall.textContent = `${prefix} ${mainVal} ${mainUnit}`
             break;
         case timeElapsed < month:
             // using remainder/modulo (%) to get the remaining milliseconds value
@@ -181,29 +182,29 @@ function renderLastUpdated(oldDate) {
             // then throw it to get as much [minute] as possible
             mainVal = Math.floor(timeElapsed / week);
             secVal = Math.floor((timeElapsed % week) / day);
-            mainUnit = "w";
-            secUnit = "d ago";
+            mainUnit = mainVal > 1 ? "weeks" : "week";
+            secUnit = (secVal > 1 ? "days" : "day") + " ago";
             newSmall.textContent =
-            `${prefix} ${mainVal}${mainUnit}` +
-            (secVal > 0 ? ` ${secVal}${secUnit}` : " ago");
+            `${prefix} ${mainVal} ${mainUnit}` +
+            (secVal > 0 ? `, ${secVal} ${secUnit}` : " ago");
             break;
         case timeElapsed < year:
             mainVal = Math.floor(timeElapsed / month);
             secVal = Math.floor((timeElapsed % month) / week);
-            mainUnit = "mo";
-            secUnit = "w ago";
+            mainUnit = mainVal > 1 ? "months" : "month";
+            secUnit = (secVal > 1 ? "weeks" : "week") + " ago";
             newSmall.textContent =
-            `${prefix} ${mainVal}${mainUnit}` +
-            (secVal > 0 ? ` ${secVal}${secUnit}` : " ago");
+            `${prefix} ${mainVal} ${mainUnit}` +
+            (secVal > 0 ? `, ${secVal} ${secUnit}` : " ago");
             break;
         default:
             mainVal = Math.floor(timeElapsed / year);
             secVal = Math.floor((timeElapsed % year) / month);
-            mainUnit = "y";
-            secUnit = "mo ago";
+            mainUnit = mainVal > 1 ? "years" : "year";
+            secUnit = (secVal > 1 ? "months" : "month") + " ago";
             newSmall.textContent =
-            `${prefix} ${mainVal}${mainUnit}` +
-            (secVal > 0 ? ` ${secVal}${secUnit}` : " ago");
+            `${prefix} ${mainVal} ${mainUnit}` +
+            (secVal > 0 ? `, ${secVal} ${secUnit}` : " ago");
     }
 
     mainSection.append(newSmall);
