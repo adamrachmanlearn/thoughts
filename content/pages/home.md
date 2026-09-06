@@ -11,5 +11,5 @@ Listening: [Reason for Existence]
 Reading: [List]
 
 [Reverse: 1999]: https://www.prydwen.gg/re1999/guides/introduction-to-the-game
-[Reason for existence]: https://youtu.be/86IxCGKUOzY?si=gccIW8SAXMVXz5Gt
+[Reason for existence]: https://music.youtube.com/watch?v=vWin8BORL4w&si=y0aNZC_B5AMTCk1F
 [List]: https://incetera.notion.site/reading-list-3cb24287341380a58559d59e14c3f2ba?source=copy_link
