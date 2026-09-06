@@ -48,7 +48,7 @@ async function renderHome() {
     renderLatest(manifest);
     // renderFeatured(manifest);
 
-    defaultBehavior();
+    defaultBehavior("home");
 }
 
 async function renderPage(slug) {
@@ -304,8 +304,8 @@ function scrollToTop(behavior) {
 
 function defaultBehavior(slug) {
     slug !== "archives" ? toggleSearch(false) : toggleSearch(true);
-
-    renderBadges();
+    if(slug === "home") renderBadges();
+    
     adjustExtLinks(mainSection);
     footerSection.style.display = "block";
     scrollToTop();
