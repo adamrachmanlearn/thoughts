@@ -1,5 +1,13 @@
 [
     {
+        "slug": "i-lost-a-tooth",
+        "title": "I lost a tooth",
+        "fileName": "ilostatooth.md",
+        "posted": "2026-09-06",
+        "tags": [],
+        "isPage": false
+    },
+    {
         "slug": "happy-birthday-me",
         "title": "Happy birthday, me",
         "fileName": "happybirthdayme.md",
