@@ -4,7 +4,13 @@
 
 This is where I write things that crossed my mind at some point, **that's literally it**. Like any thoughts, not all of them are facts, most, if not all of them are *very subjective*, but I'll use this free will of mine to write them anyway.
 
-#### Currently
+#### Current
+
+##### Running
+
+Successfuly increased my highest weekly mileage to 34km, starting to feel like 40km would realistically be my peak lol.
+
+##### Other
 
 Playing: [Reverse: 1999]
 Listening: [Reason for Existence]

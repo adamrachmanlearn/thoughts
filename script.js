@@ -40,8 +40,8 @@ async function renderHome() {
     mainSection.innerHTML = content;
 
     // change this after updating current section
-    const updateDate = "2026-08-29";
-    const updateTime = "15:15";
+    const updateDate = "2026-09-12";
+    const updateTime = "19:16";
 
     renderLastUpdated(`${updateDate}T${updateTime}`);
 
