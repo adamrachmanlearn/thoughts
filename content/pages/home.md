@@ -2,7 +2,7 @@
 
 <br>
 
-![Totoro gif](test)
+![Totoro gif](assets/gifs/totoro.gif)
 
 <br>
 
