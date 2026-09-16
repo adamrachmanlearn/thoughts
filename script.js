@@ -276,6 +276,12 @@ function renderBadges() {
     mainSection.append(newSection);
 }
 
+function adjustGif() {
+    const gif = mainSection.getElementsByTagName("img")[0];
+    gif.style.height = "150px";
+    gif.style.margin = "0 auto";
+}
+
 function formatDate(string) {
     return new Intl.DateTimeFormat("en-US", {
         year: "numeric",
@@ -304,8 +310,11 @@ function scrollToTop(behavior) {
 
 function defaultBehavior(slug) {
     slug !== "archives" ? toggleSearch(false) : toggleSearch(true);
-    if(slug === "home") renderBadges();
-    
+    if(slug === "home") {
+        renderBadges();
+        adjustGif();
+    }
+
     adjustExtLinks(mainSection);
     footerSection.style.display = "block";
     scrollToTop();

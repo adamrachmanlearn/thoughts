@@ -2,6 +2,10 @@
 
 <br>
 
+![Totoro gif](../../assets/gifs/totoro.gif)
+
+<br>
+
 This is where I write things that crossed my mind at some point, **that's literally it**. Like any thoughts, not all of them are facts, most, if not all of them are *very subjective*, but I'll use this free will of mine to write them anyway.
 
 #### Current
