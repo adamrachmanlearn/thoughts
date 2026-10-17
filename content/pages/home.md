@@ -10,12 +10,6 @@ This is where I write things that crossed my mind at some point, **that's litera
 
 #### Current
 
-##### Running
-
-Successfuly increased my highest weekly mileage to 34km, starting to feel like 40km would realistically be my peak lol.
-
-##### Other
-
 Playing: [Reverse: 1999]
 Listening: [Reason for Existence]
 Reading: [List]
