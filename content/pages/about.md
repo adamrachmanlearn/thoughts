@@ -6,4 +6,4 @@ I'm a *run-of-the-mill* guy who has difficulty in expressing himself, hence this
 
 This site is *not* a valid representative of *anything* that has ever written at, *even the author*. It’s *not* something you should quote me on, cite at, even more so, to accept it at face value, *always* take it with a grain of salt.
 
-Less of a profound writings, more like a digital scribbles I left open for anyone to see.
+Less of a profound writings, more like a digital scribbles I left open for anyone to see. Might be the only thing left from me when I *go*.
